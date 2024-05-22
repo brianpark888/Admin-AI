@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './button'; // Adjust the import path as necessary
+import Button from './Button'; // Adjust the import path as necessary
 
 const Navbar = () => {
     return (
