@@ -1,8 +1,14 @@
+"use client";
+import ShowForm from '@/Components/ShowForm';
+import Navbar from '@/Components/NavigationBar';
+import {useState} from 'react';
 
 export default function Home() {
+
     return (
       <div>
-        <h1>Submit Form</h1>
+        <Navbar />
+        <ShowForm />
       </div>
     );
   }

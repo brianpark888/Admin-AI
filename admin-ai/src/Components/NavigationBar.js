@@ -3,13 +3,11 @@ import Button from './Button'; // Adjust the import path as necessary
 
 const Navbar = () => {
     return (
-        <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <nav className="bg-black text-white p-6 flex justify-between items-center">
             <div className="text-lg font-semibold">
-                My Navbar
+                Admin-AI
             </div>
-            <Button className="bg-blue-500 hover:bg-blue-700">
-                Button
-            </Button>
+            <Button>LogIn</Button>
         </nav>
     );
 };
