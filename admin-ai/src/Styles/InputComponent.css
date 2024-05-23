@@ -1,0 +1,42 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+.dynamic-box {
+  position: absolute;
+  width: 210px;
+  height: 297px;
+  margin: 15px;
+  transition: left 0.5s ease, top 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 24px;
+}
+
+.box-number {
+  font-size: 24px;
+  color: black;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.submit-button, .enter-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #4895ef;
+}

@@ -1,0 +1,45 @@
+/* styles/TableComponent.module.css */
+
+.tableContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .table {
+    border-collapse: collapse;
+    width: 80%; /* Adjust width as needed */
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden; /* Ensure rounded corners are applied to the whole table */
+  }
+  
+  .table th, .table td {
+    border: 3px solid #ffffff;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #4895ef;
+    color: white; /* Change text color to white */
+  }
+  
+  /* To ensure the borders of the table cells don't overlap with the rounded corners */
+  .table tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+  }
+  
+  .table tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+  }
+  
+  .table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+  }
+  
+  .table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+  }
+  
