@@ -4,9 +4,11 @@ import RoundedBox from './CreateForm';
 import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
 const formsCollection = collection(db, 'forms');
+const websiteDomain = "http://localhost:3000/SubmitForm/"
 function FormList(){
     const [form, setForm]= useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [menuToggle, setMenuToggle] = useState(false);
 
     const getForms  = async () => {
         try {
@@ -14,7 +16,7 @@ function FormList(){
             const results = await getDocs(q);
             const newForms = [];
             results.docs.forEach((doc) => {
-                newForms.push({ name: doc.data().name, description: doc.data().description});
+                newForms.push({name: doc.data().name, description: doc.data().description, submissionTime: doc.data().submissionTime, code:doc.data().code});
             });
             setForm(newForms);
         } catch (error) {
@@ -52,16 +54,41 @@ function FormList(){
                         {form.map((item, id) => (
                             <li key={id} className="text-center my-4 bg-slate-100 my-2 rounded-lg hover:scale-105 cursor-pointer">
                                 <div className='p-4 w-full flex justify-between'>
-                                    <span className="font-bold">📄 {item.name}</span>
                                     <div class="flex items-center space-x-5">
-                                        <span className="inline-block">{item.description}</span>
-                                        <div class="flex flex-col justify-around h-6 w-6">
+                                        <span className="font-bold">📄 {item.name}</span>
+                                        <span className="inline-block">
+                                            {item.description.length > 20 ? item.description.slice(0, 20) + '...' : item.description}
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-5">
+                                    <span className="inline-block">
+                                        {new Date(item.submissionTime).toLocaleDateString('en-US', {
+                                            weekday: 'long', // "Monday"
+                                            year: 'numeric', // "2024"
+                                            month: 'long', // "May"
+                                            day: 'numeric' // "24"
+                                        })} {new Date(item.submissionTime).toLocaleTimeString('en-US', {
+                                            hour: '2-digit', // "06"
+                                            minute: '2-digit', // "11"
+                                            second: '2-digit', // "22"
+                                            hour12: true // "AM" or "PM"
+                                        })}
+                                        </span>
+                                        <div class="flex flex-col justify-around h-6 w-6" onClick={() => setMenuToggle(!menuToggle)}>
                                             <div class="h-1 w-full bg-black"></div>
                                             <div class="h-1 w-full bg-black"></div>
                                             <div class="h-1 w-full bg-black"></div>
                                         </div>
+                                        
                                     </div>
+                                    
                                 </div>
+                                {menuToggle && (
+                                            <div className="bg-white text-left mx-5 p-10">
+                                            <span className="block">Form Descriptionl: {item.description}</span>
+                                            <span className="block">Invite Link: {websiteDomain}?v={item.code}</span>
+                                            </div>
+                                )}
                             </li>
                         ))}
                     </ul>

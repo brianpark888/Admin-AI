@@ -1,45 +1,25 @@
 "use client";
 import React, { useState } from 'react';
-import { useRouter } from "next/navigation";
 import Button from "./Button";
-import { propagateServerField } from 'next/dist/server/lib/render-server';
 
-const ShowForm = (formName, formQuestion) => {
-  const router = useRouter();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [field, setField] = useState('');
+const DisplayForm = (formName, formQuestion) => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [field, setField] = useState('');
 
+    
   const handleChange = (event, setter) => {
     setter(event.target.value);
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (!name || !email || !field) {
-      alert('모든 필드를 입력해야 합니다.');
-      return;
-    }
-
-    const formData = {
-      name,
-      email,
-      field
-    };
-
-    // 새로운 form 생성 및 Submission 페이지로 이동
-    router.push({
-      pathname: '/submission',
-      query: formData,
-    });
   };
 
   return (
-    <div className="p-4 fixed inset-y-0 left-1/2 transform -translate-x-1/2 flex items-center justify-center border-2  border-black rounded-lg w-1/3 h-1/2 my-20">
+    <div className="p-4 fixed inset-y-0 left-1/2 transform -translate-x-1/2 flex items-center justify-center border-2 border-black rounded-lg w-1/3 h-1/2 my-20">
       <form onSubmit={handleSubmit}>
-        <h1>{props.formName}</h1>
-        <div className='grid grid-cols-2 gap-4'>
+        <h1 className='font-bold text-center'>{formName}</h1>
+        <div className='grid grid-cols-2 gap-4 my-5'>
             <div className="mb-4">
             <label className="block mb-2 text-gray-700 font-semibold">Name</label>
             <input
@@ -62,7 +42,7 @@ const ShowForm = (formName, formQuestion) => {
         </div>
 
         <div className="mb-4">
-          <label className="block mb-2 text-gray-700 font-semibold">{props.formQuestion}</label>
+          <label className="block mb-2 text-gray-700 font-semibold">{formQuestion}</label>
           <input
             type="text"
             value={field}
@@ -74,7 +54,6 @@ const ShowForm = (formName, formQuestion) => {
         <Button>Submit</Button>
       </form>
     </div>
-  );
-};
-
-export default ShowForm;
+);
+}
+export default DisplayForm;

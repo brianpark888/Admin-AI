@@ -6,8 +6,23 @@ import Toast from './Toast';
 import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
 const formsCollection = collection(db, 'forms');
+
+
+function generateCode() {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let code = '';
+  for (let i = 0; i < 6; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      code += characters[randomIndex];
+  }
+  return code;
+}
+
+
 const CreateForm = ({ onClose }) => {
   const router = useRouter();
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [field, setField] = useState('');
   const [prompt, setPrompt] = useState(''); // set state variables
   const [showToast, setShowToast] = useState(false); // set state variable
@@ -20,7 +35,7 @@ const CreateForm = ({ onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!field || !prompt) {
+    if (!name || !description|| !field || !prompt) {
       alert('모든 필드를 입력해야 합니다.');
       return;
     }
@@ -28,19 +43,22 @@ const CreateForm = ({ onClose }) => {
 
   
     const docRef = await addDoc(formsCollection, {
+      name: name,
+      description: description,
       field: field,
       prompt: prompt,
+      code: generateCode(),
       submissionTime: new Date().toISOString(),
     });
 
        
     setShowToast(true); // Set toast visibility first
-
-    setTimeout(() => {
-      onClose(); // Delay closing the modal to allow the toast to show
-    }, 400); // Adjust delay as necessary for UX
     setField("");
     setPrompt("");
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
+    
 
 };
 
@@ -56,7 +74,24 @@ const CreateForm = ({ onClose }) => {
         </button>
         <div className="p-4">
           <form onSubmit={handleSubmit}>
-
+            <div className='mb-4'>
+              <label className="block mb-2 text-gray-700 font-semibold">Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(event) => handleChange(event, setName)}
+                className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              />
+            </div>
+            <div className='mb-4'>
+              <label className="block mb-2 text-gray-700 font-semibold">Description</label>
+              <input
+                type="text"
+                value={description}
+                onChange={(event) => handleChange(event, setDescription)}
+                className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              />
+            </div>
             <div className="mb-4">
               <label className="block mb-2 text-gray-700 font-semibold">Field</label>
               <input
