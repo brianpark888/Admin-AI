@@ -37,7 +37,9 @@ function FormList(){
 
     return(
         <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">
-                <div className='bg-slate-200 p-4 rounded-lg z-10 w-full max-w-5xl p-20'>
+            <div className='relative'>
+                <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div>
+                <div className='bg-white shadow-sm p-7 rounded-lg z-10 w-full max-w-7xl p-20 h-auto'>
                     <div className="w-full flex justify-between">
                         <h1 className="font-bold text-2xl inline-block">Forms</h1>
                         <Button onClick={openModal}>+</Button>
@@ -52,7 +54,7 @@ function FormList(){
 
                     <ul>
                         {form.map((item, id) => (
-                            <li key={id} className="text-center my-4 bg-slate-100 my-2 rounded-lg hover:scale-105 cursor-pointer">
+                            <li key={id} className="text-center my-4 bg-slate-100 shadow-md my-2 rounded-lg hover:scale-105 cursor-pointer max-w-full">
                                 <div className='p-4 w-full flex justify-between'>
                                     <div class="flex items-center space-x-5">
                                         <span className="font-bold">📄 {item.name}</span>
@@ -85,13 +87,14 @@ function FormList(){
                                 </div>
                                 {menuToggle && (
                                             <div className="bg-white text-left mx-5 p-10">
-                                            <span className="block">Form Descriptionl: {item.description}</span>
+                                            <span className="block">Form Description: {item.description}</span>
                                             <span className="block">Invite Link: {websiteDomain}?v={item.code}</span>
                                             </div>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
     );
