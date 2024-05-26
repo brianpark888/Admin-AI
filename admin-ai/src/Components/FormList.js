@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Button from './Button';
-import RoundedBox from './CreateForm';
+import CreateForm from './CreateForm';
 import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
 const formsCollection = collection(db, 'forms');
@@ -45,7 +45,7 @@ function FormList(){
                         <Button onClick={openModal}>+</Button>
                     </div>
                     {isModalOpen && (
-                        <RoundedBox
+                        <CreateForm
                         formType="create"  // Or "show", depending on the scenario
                         onClose={closeModal}
                         />
@@ -88,7 +88,7 @@ function FormList(){
                                 {menuToggle && (
                                             <div className="bg-white text-left mx-5 p-10">
                                             <span className="block">Form Description: {item.description}</span>
-                                            <span className="block">Invite Link: {websiteDomain}?v={item.code}</span>
+                                            <span className="block">Invite Link: {websiteDomain}?code={item.code}</span>
                                             </div>
                                     )}
                                 </li>
