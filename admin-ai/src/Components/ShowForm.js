@@ -2,19 +2,23 @@
 import React, { useState } from 'react';
 import { useRouter } from "next/navigation";
 import Button from "./Button";
-import { propagateServerField } from 'next/dist/server/lib/render-server';
+import { addDoc,collection } from 'firebase/firestore';
+import { db } from '@/firebase';
 
-const ShowForm = (formName, formQuestion) => {
-  const router = useRouter();
+import Toast from './Toast';
+
+const formsCollection = collection(db, 'forms');
+const ShowForm=({formName, formQuestion}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [field, setField] = useState('');
+  const [showToast, setShowToast] = useState(false); // set state variable
 
   const handleChange = (event, setter) => {
     setter(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!name || !email || !field) {
@@ -22,59 +26,46 @@ const ShowForm = (formName, formQuestion) => {
       return;
     }
 
-    const formData = {
-      name,
-      email,
-      field
-    };
-
-    // 새로운 form 생성 및 Submission 페이지로 이동
-    router.push({
-      pathname: '/submission',
-      query: formData,
+    const docRef = await addDoc(formsCollection, {
+      name:name,
+      email:email,
+      field:field,
     });
+    setShowToast(true); // Set toast visibility first
+    setEmail("");
+    setName("");
+    setField("");
+
   };
 
-  return (
-    <div className="p-4 fixed inset-y-0 left-1/2 transform -translate-x-1/2 flex items-center justify-center border-2  border-black rounded-lg w-1/3 h-1/2 my-20">
-      <form onSubmit={handleSubmit}>
-        <h1>{props.formName}</h1>
-        <div className='grid grid-cols-2 gap-4'>
-            <div className="mb-4">
-            <label className="block mb-2 text-gray-700 font-semibold">Name</label>
-            <input
-                type="text"
-                value={name}
-                onChange={(event) => handleChange(event, setName)}
-                className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
+    return (
+      <div className='flex min-h-screen flex-col items-center justify-between sm:p-24'>
+        <div className="relative bg-white shadow-sm p-7 rounded-lg z-10 w-full max-w-7xl p-20 h-auto">
+          <div className="text-center p-5 border-b-2">
+            <h1 className="text-xl font-bold">{formName}</h1>
+            <p className="text-gray-600"></p>
+          </div>
+          <form className="p-5" onSubmit={handleSubmit}>
+            <div className="mb-5">
+              <label htmlFor="name" className="block mb-2 font-bold">Name</label>
+              <input type="text" id="name" className="w-full my-4 p-2 border border-gray-300 rounded" value={name} onChange={(e) => handleChange(e, setName)} />
+              
+              <label htmlFor="email" className="block mb-2 font-bold">Email</label>
+              <input type="email" id="email" className="w-full p-2 border border-gray-300 rounded" value={email} onChange={(e) => handleChange(e, setEmail)} />
+              
             </div>
-
-            <div className="mb-4">
-            <label className="block mb-2 text-gray-700 font-semibold">E-mail</label>
-            <input
-                type="email"
-                value={email}
-                onChange={(event) => handleChange(event, setEmail)}
-                className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
+            <div className="mb-5">
+              <label htmlFor="field" className="block mb-2 font-bold">{formQuestion}</label>
+              <input type="text" id="field" className="w-full p-2 border border-gray-300 rounded" value={field} onChange={(e) => handleChange(e, setField)} />
             </div>
+            <Button onClick={handleSubmit}>Submit</Button>
+            {/* <button type="submit" className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-700">Submit</button> */}
+          </form>
+          {showToast && <Toast message="Form created successfully!" isVisible={true} />}
         </div>
-
-        <div className="mb-4">
-          <label className="block mb-2 text-gray-700 font-semibold">{props.formQuestion}</label>
-          <input
-            type="text"
-            value={field}
-            onChange={(event) => handleChange(event, setField)}
-            className="w-full rounded-md border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
-
-        <Button>Submit</Button>
-      </form>
-    </div>
-  );
+      </div>
+    );
+  
 };
 
 export default ShowForm;

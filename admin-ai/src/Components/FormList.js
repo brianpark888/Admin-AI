@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Button from './Button';
-import RoundedBox from './CreateForm';
+import CreateForm from './CreateForm';
 import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
 
