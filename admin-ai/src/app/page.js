@@ -1,14 +1,20 @@
+"use client";
 import React from 'react';
 import Button from '../Components/Button';
 import Navbar from '../Components/NavigationBar';
 
 export default function Home() {
+
+  const handleClick = () => {
+    window.location.href = '/Login';
+  };
+
   return (
     <>
       <style>
         {`
           .full-width-section {
-            background: linear-gradient(45deg, #6003FF, #6003FF, #F900B9, #FF0074, #FF7343, #FFBE39, #F9F871);
+            background: #A93AFF;
             margin: 0;
             padding: 110px 0;
             color: white;
@@ -17,11 +23,6 @@ export default function Home() {
             background-size: 400% 400%;
           }
 
-          @keyframes moveBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
         `}
       </style>
       <Navbar />
@@ -31,7 +32,7 @@ export default function Home() {
           <p className="text-lg text-center mb-8">
             Our product uses AI to reduce the time for administrators to process forms sent in by submitters. It ensures that people enter text along a specific format by checking through a chatbot. It also allows admins to process responses quicker.
           </p>
-          <Button>Get Started</Button>
+          <button onClick={handleClick} className='bg-black py-3 px-4 font-bold border-2-[#8302E1] rounded-lg hover:bg-slate-700'>Get Started</button>
         </div>
       </div>
     </>

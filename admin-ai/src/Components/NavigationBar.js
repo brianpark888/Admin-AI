@@ -2,6 +2,9 @@ import React from 'react';
 import Button from './Button';
 
 const Navbar = () => {
+    const handleClick = () => {
+        window.location.href = '/Login';
+      };
     return (
         <>
             <style>
@@ -17,7 +20,7 @@ const Navbar = () => {
 
                     .nav-brand {
                         font-size: 30px;
-                        background: linear-gradient(45deg, #6003FF, #FF0074);
+                        background: #8302E1;
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         font-weight: bold;
@@ -32,7 +35,7 @@ const Navbar = () => {
             </style>
             <nav className="navbar">
                 <div className="nav-brand">Admin-AI</div>
-                <Button className="button">Login</Button>
+                <Button onClick={handleClick} className="button">Login</Button>
             </nav>
         </>
     );

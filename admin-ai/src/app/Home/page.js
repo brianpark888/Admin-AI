@@ -24,9 +24,12 @@ export default function Home() {
 
 
 
+
+
     return (
         <>
             <Navbar />
+            <Button>Logout</Button>
             <FormList></FormList>
         </>
     );
