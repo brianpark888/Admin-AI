@@ -2,7 +2,13 @@
 import Navbar from '@/Components/NavigationBar';
 import React, { useState } from 'react';
 import Button from '@/Components/Button';
+import {useRouter} from "next/navigation";
+import {useSession, signIn, signOut} from "next-auth/react";
+
 function LoginPage() {
+    const router = useRouter();
+    const {data:session} = useSession();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -47,6 +53,14 @@ function LoginPage() {
                         />
                     </div>
                     <Button className="py-2">Login</Button>
+                    <div className="grid m-auto text-center">
+            <div className="m-4">If not signed in</div>
+            <Button 
+            onClick={() => signIn()}
+            >
+                Sign in
+            </Button>
+            </div>
                 </form>
             </div>
         </div>
