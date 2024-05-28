@@ -5,6 +5,7 @@ const Navbar = () => {
     const handleClick = () => {
         window.location.href = '/Login';
       };
+      
     return (
         <>
             <style>
