@@ -58,7 +58,7 @@ function FormList(){
                         <Button onClick={() => openModal(null)}>+</Button>
                     </div>
                     {isModalOpen && (
-                        <RoundedBox
+                        <CreateForm
                             formType={selectedForm ? "show" : "create"}
                             onClose={closeModal}
                             formData={selectedForm}
