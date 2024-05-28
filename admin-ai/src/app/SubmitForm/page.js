@@ -4,10 +4,12 @@ import Navbar from '@/Components/NavigationBar';
 import { db } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore'; // Correct import for getDoc
 import ShowForm from '@/Components/ShowForm';
+import FinishSubmission from '@/Components/FinishSubmission';
 
 export default function Home() {
   const [formData, setFormData] = useState({ formName: '', field: '' });
   const [formId, setFormId] = useState(''); // State to hold the formId
+  const [showForm, setShowForm] = useState(true);
 
   useEffect(() => {
     const retrieveDoc = async () => {
@@ -28,15 +30,16 @@ export default function Home() {
       }
     };
 
-    retrieveDoc();
+    retrieveDoc();// Set showForm state to false after retrieving data
   }, []); // Dependency array remains empty if we only want to run this effect on component mount
 
   return (
     <>
-      <Navbar />
       <div>
-        <p>{formData.formName}</p>
-        <ShowForm formId={formId} formName={formData.formName} formQuestion={formData.field} />
+        <p>{showForm}</p>
+        {<ShowForm formId={formId} formName={formData.formName} formQuestion={formData.field} />}
+        {<FinishSubmission /> && !showForm}
+
       </div>
     </>
   );
