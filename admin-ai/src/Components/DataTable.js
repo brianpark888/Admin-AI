@@ -1,33 +1,32 @@
 import React from 'react';
 
 function DataTable() {
-  // Sample data
   const data = [
     { name: "Alice", email: "alice@example.com", answer: "Yes" },
     { name: "Bob", email: "bob@example.com", answer: "No" },
     { name: "Charlie", email: "charlie@example.com", answer: "Maybe" }
   ];
 
-return (
-    <table style={{borderCollapse: 'collapse', width: '100%'}}>
-        <thead>
-            <tr>
-                <th style={{border: '1px solid black', padding: '8px', backgroundColor: 'lightgray'}}>Name</th>
-                <th style={{border: '1px solid black', padding: '8px', backgroundColor: 'lightgray'}}>Email</th>
-                <th style={{border: '1px solid black', padding: '8px', backgroundColor: 'lightgray'}}>Answer</th>
-            </tr>
-        </thead>
-        <tbody>
-            {data.map((item, index) => (
-                <tr key={index}>
-                    <td style={{border: '1px solid black', padding: '8px'}}>{item.name}</td>
-                    <td style={{border: '1px solid black', padding: '8px'}}>{item.email}</td>
-                    <td style={{border: '1px solid black', padding: '8px'}}>{item.answer}</td>
-                </tr>
-            ))}
-        </tbody>
+  return (
+    <table className="min-w-full divide-y divide-gray-200 border-collapse">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="border px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Name</th>
+          <th className="border px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Email</th>
+          <th className="border px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Answer</th>
+        </tr>
+      </thead>
+      <tbody className="bg-white">
+        {data.map((item, index) => (
+          <tr key={index} className="border-b">
+            <td className="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.name}</td>
+            <td className="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.email}</td>
+            <td className="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.answer}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
-);
+  );
 }
 
 export default DataTable;
