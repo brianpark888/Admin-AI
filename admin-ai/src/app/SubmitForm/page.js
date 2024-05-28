@@ -2,47 +2,42 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/Components/NavigationBar';
 import { db } from '@/firebase';
-import { collection, query, getDocs, where } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore'; // Correct import for getDoc
 import ShowForm from '@/Components/ShowForm';
 
-
-const formsCollection = collection(db, 'forms');
-
 export default function Home() {
-  const [code, setCode]= useState('');
-  const [formData, setFormData]= useState({formName: '', field: ''});
-
+  const [formData, setFormData] = useState({ formName: '', field: '' });
+  const [formId, setFormId] = useState(''); // State to hold the formId
 
   useEffect(() => {
     const retrieveDoc = async () => {
       const queryParams = new URLSearchParams(window.location.search);
-      const codeFromURL = queryParams.get('code');
-      if (codeFromURL) {
-        setCode(codeFromURL); // Set the code state
-        const formsCollection = collection(db, 'forms');
-        const q = query(formsCollection, where('code', '==', codeFromURL));
-        const results = await getDocs(q);
-        if (!results.empty) {
-          const docData = results.docs[0].data();
+      const formId = queryParams.get('code'); // Assuming 'code' query param is the form ID
+      if (formId) {
+        setFormId(formId); // Set the formId state
+        const formRef = doc(db, 'forms', formId); // Correct reference to a single document
+        const docSnap = await getDoc(formRef); // Correct method to get a single document
+        if (docSnap.exists()) {
           setFormData({
-            formName: docData.Name,
-            field: docData.field,
+            formName: docSnap.data().name,
+            field: docSnap.data().field,
           });
+        } else {
+          console.log("No such document!");
         }
       }
     };
 
-
     retrieveDoc();
-  }, []); // Empty dependency array means this effect runs only once after the initial render
+  }, []); // Dependency array remains empty if we only want to run this effect on component mount
 
   return (
-  <>
-    <div>
-      <p>{code}</p>
-      <p>{formData.formName}</p>
-      <ShowForm formName="Form1" formQuestion={formData.field} />
-    </div>
-  </>
+    <>
+      <Navbar />
+      <div>
+        <p>{formData.formName}</p>
+        <ShowForm formId={formId} formName={formData.formName} formQuestion={formData.field} />
+      </div>
+    </>
   );
 }

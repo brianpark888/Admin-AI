@@ -5,8 +5,8 @@ import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
 
 const formsCollection = collection(db, 'forms');
-const websiteDomain = "http://localhost:3000/SubmitForm/"
-
+const submitFormWebsiteDomain = "http://localhost:3000/SubmitForm/"
+const reviewFormWebsiteDomain = "http://localhost:3000/ReviewForm/"
 function FormList(){
     const [form, setForm]= useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +21,7 @@ function FormList(){
             const results = await getDocs(q);
             const newForms = [];
             results.docs.forEach((doc) => {
-                newForms.push({name: doc.data().name, description: doc.data().description, submissionTime: doc.data().submissionTime, code:doc.data().code,  responses: doc.data().responses || 0}); //added 'responses' field
+                newForms.push({id:doc.id, name: doc.data().name, description: doc.data().description, submissionTime: doc.data().submissionTime, responses: doc.data().responses || 0}); //added 'responses' field
             });
             setForm(newForms);
         } catch (error) {
@@ -131,7 +131,8 @@ function FormList(){
                                             <td colSpan="5" className="px-6 py-4">
                                                 <div className="bg-gray-100 shadow-inner p-4 rounded-lg">
                                                     <span className="block"><span className="font-semibold">Form Description:</span> {item.description}</span>
-                                                    <span className="block"><span className="font-semibold">Invite Link:</span> {websiteDomain}?v={item.code}</span>
+                                                    <a className="block"><span className="font-semibold">Invite Link:</span> {submitFormWebsiteDomain}?code={item.id}</a>
+                                                    <a className="block"><span className="font-semibold">Review Link:</span> {reviewFormWebsiteDomain}?code={item.id}</a>
                                                 </div>
                                             </td>
                                         </tr>
