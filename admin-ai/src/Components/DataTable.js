@@ -1,12 +1,38 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {db} from '@/firebase';
+import {doc, collection, getDocs, getDoc} from 'firebase/firestore'
 
-function DataTable() {
-  const data = [
-    { name: "Alice", email: "alice@example.com", answer: "Yes" },
-    { name: "Bob", email: "bob@example.com", answer: "No" },
-    { name: "Charlie", email: "charlie@example.com", answer: "Maybe" }
-  ];
+function DataTable({ formId }) {
 
+
+  const [formDetails, setFormDetails] = useState(null);
+  const [responses, setResponses] = useState([]);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const formDocRef = doc(db, 'forms', formId);
+      
+      // Fetching the form details
+      const formSnapshot = await getDoc(formDocRef);
+      if (formSnapshot.exists()) {
+        setFormDetails(formSnapshot.data());
+      } else {
+        console.log("No such form!");
+      }
+      
+      // Fetching the responses subcollection
+      const responsesRef = collection(formDocRef, 'responses');
+      const responseSnapshot = await getDocs(responsesRef);
+      const loadedResponses = responseSnapshot.docs.map(doc => doc.data());
+      setResponses(loadedResponses);
+    };
+
+    fetchData();
+  }, [formId]);
+
+
+  
   return (
     <table className="min-w-full divide-y divide-gray-200 border-collapse">
       <thead className="bg-gray-50">
@@ -17,13 +43,13 @@ function DataTable() {
         </tr>
       </thead>
       <tbody className="bg-white">
-        {data.map((item, index) => (
+        {/* {data.map((item, index) => (
           <tr key={index} className="border-b">
             <td className="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.name}</td>
             <td className="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.email}</td>
             <td className="border px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.answer}</td>
           </tr>
-        ))}
+        ))} */}
       </tbody>
     </table>
   );
