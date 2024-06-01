@@ -41,11 +41,12 @@ export default function Home() {
                     <div className="relative w-full max-w-5xl">
                       <div className="bg-white shadow-md rounded-lg z-10 w-full max-w-7xl p-20">
                         <div className="flex justify-between items-center mb-4">
-                          <h1 className="text-2xl font-bold">Form</h1>
+                          <h1 className="text-2xl font-bold">{formData.formName}</h1>
                           <div className="flex items-center">
                             <p className="font-bold">2024.5.28</p> 
                           </div>
                         </div>
+                        <p><span className="font-bold">Description: </span>{formData.field}</p>
                         <hr className="solid"></hr>
                         <br></br>
                         <h3 className="text-xl font-bold mb-4">User Response</h3>
@@ -56,3 +57,4 @@ export default function Home() {
             </div>
         </>
     );
+}

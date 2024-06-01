@@ -6,11 +6,7 @@ import CreateForm from '@/Components/CreateForm';
 import FormList from '@/Components/FormList';
 
 export default function Home() {
-    const [items, setItems] = useState([
-        { name: "Form1", description: 2.50 },
-        { name: "Form2", description: 2.00 },
-        { name: "Form3", description: 1.50 },
-    ]);
+    const [items, setItems] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
