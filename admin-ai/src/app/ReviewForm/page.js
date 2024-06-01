@@ -25,7 +25,10 @@ export default function Home() {
                     if (docSnap.exists()) {
                       setFormData({
                         formName: docSnap.data().name,
+                        description: docSnap.data().description,
                         field: docSnap.data().field,
+                        prompt: docSnap.data().prompt,
+                        creationTime: docSnap.data().submissionTime,
                       });
                       setFormId(code); // Set formId after data has been confirmed to exist
                     } else {
@@ -59,9 +62,10 @@ export default function Home() {
                             </div>
                         </div>
                         <div>
-                          <p className="font-md text-lg mt-1 mb-4">2024.5.28</p>
+                          <p className="font-md text-lg mt-1 mb-4">{formData.creationTime}</p>
                         </div>
-                        <p className="mb-4"><span className="font-bold">Description: </span>{formData.field}</p>
+                        <p className="mb-4"><span className="font-bold">Description: </span>{formData.description}</p>
+                        <p className="mb-4"><span className="font-bold">Question: </span>{formData.field}</p>
                         <hr className="solid mb-8"></hr>
                         <div className="flex">
                           <div className="w-1/2 pr-2"> 
@@ -75,7 +79,7 @@ export default function Home() {
                               <h3 className="text-xl font-bold mb-2">Chat</h3>
                               <span className="text-sm mb-2">Use the Chatbot to look for desired answers</span> 
                               <div className="mt-1"> 
-                                  <ChatBot />
+                                  {formId && <ChatBot formId={formId} formQuestion= {formData.field}/>}
                               </div>
                           </div>
                       </div>

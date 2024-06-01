@@ -2,19 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {db} from '@/firebase';
 import {doc, collection, getDocs, getDoc} from 'firebase/firestore'
 
-function DataTable({ formId }) {
-
-
-  const [formDetails, setFormDetails] = useState(null);
-  const [responses, setResponses] = useState([{answer: '', email: '', name: '', submittedAt: ''}]);
+function DataTable({ formId}) {
+  
+  const [responses, setResponses] = useState([{name: '', email: '', answer: ''}]);
 
 
   useEffect(() => {
     const fetchData = async () => {
-      const formDocRef = doc(db, 'forms', formId);
-      
-      const formSnapshot = await getDoc(formDocRef);
-      
+      const formDocRef = doc(db, 'forms', formId);      
       const responsesRef = collection(formDocRef, 'submissions');
       const responseSnapshot = await getDocs(responsesRef);
       const loadedResponses = responseSnapshot.docs.map(doc => doc.data());
@@ -45,6 +40,7 @@ function DataTable({ formId }) {
 
   
   return (
+    <>
     <table className="min-w-full divide-y divide-gray-200 border-collapse">
       <thead className="bg-gray-50">
         <tr>
@@ -76,6 +72,7 @@ function DataTable({ formId }) {
         ))}
       </tbody>
     </table>  
+    </>
   );
 }
 

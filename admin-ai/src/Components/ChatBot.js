@@ -4,10 +4,33 @@ import { Chat } from "@/Components/Chatbot/Chat";
 import { collection, addDoc, doc, getDocs, query, orderBy, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "./Button";
-const ChatBot = () => {
+const ChatBot = ({formId, formQuestion, formPrompt}) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const [responses, setResponses] = useState("");
+  const chatPrompt = `I will give you responses to a question. This is the Question: ${formQuestion}. Responses: ${responses} I will also give you prompts to help query responses that fit criterias set in`;
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const formDocRef = doc(db, 'forms', formId);
+      const responsesRef = collection(formDocRef, 'submissions');
+      const responseSnapshot = await getDocs(responsesRef);
+      // Mapping through each document and transforming its data to a string format
+      const loadedResponses = responseSnapshot.docs.map(doc => 
+        {const data = doc.data();
+        return `Name: ${data.name}. Response: ${data.answer}`}
+      );
+      // Joining all the stringified objects into a single string with line breaks or other separators if needed
+      const responsesString = "Here is a list of responses: " + loadedResponses.join('\n');
+      setResponses(responsesString);
+    };
+  
+    fetchData();
+  }, [formId]);
+  
+
 
   const fetchMessages = async () => {
     try {
@@ -50,6 +73,7 @@ const ChatBot = () => {
         },
         body: JSON.stringify({
           messages: updatedMessages,
+          systemInstruction: chatPrompt
         }),
       });
 
