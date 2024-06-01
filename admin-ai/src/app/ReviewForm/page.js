@@ -1,9 +1,9 @@
-"use client";
 import DataTable from "@/Components/DataTable";
 import Navbar from "@/Components/NavigationBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
+import ChatBot from "@/Components/ChatBot";
 
 import React, { useState, useEffect } from 'react';
 import { db } from '@/firebase';
@@ -65,6 +65,7 @@ export default function Home() {
                             <h3 className="text-xl font-bold mb-4">User Response</h3>
                             {formId && <DataTable formId={formId} />}
                         </div>
+                        <ChatBot />
                         <div className="absolute top-0 left-0 right-0 bg-[#581c87] h-3 rounded-t-lg"></div>
                     </div>
                 </div>

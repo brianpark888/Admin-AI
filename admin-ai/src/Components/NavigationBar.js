@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import Button from './Button';
 import { useSession, signIn, signOut } from "next-auth/react";
