@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SessionProvider from './SessionProvider'; // sessionprovider import for login control
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className} style={{ backgroundColor: '#fcf7ff' }}>{children}</body>
+      <body className={inter.className} style={{ backgroundColor: '#fcf7ff' }}>
+        <SessionProvider>{children}</SessionProvider> {/* 변경된 부분 */}
+      </body>
     </html>
   );
 }

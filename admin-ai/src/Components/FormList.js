@@ -3,6 +3,10 @@ import Button from './Button';
 import CreateForm from './CreateForm';
 import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
+import { Link } from 'next/link';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'; // Added for trash icon 
 
 const formsCollection = collection(db, 'forms');
 const submitFormWebsiteDomain = "http://localhost:3000/SubmitForm/"
@@ -48,14 +52,36 @@ function FormList(){
         setExpandedFormId(expandedFormId === id ? null : id);
     }; 
 
-    return (
+    const deleteForm = async (id) => { 
+        try {
+          await deleteDoc(doc(db, 'forms', id));
+          getForms(); // recall data
+        } catch (error) {
+          console.error('Failed to delete form:', error);
+        }
+      }; //added delete form function
+
+      return (
         <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">
             <div className='relative w-full max-w-7xl'>
                 <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div>
                 <div className='bg-white shadow-sm p-7 rounded-lg z-10 w-full h-auto'>
-                    <div className="w-full flex justify-between mb-4">
+                <div className="w-full flex justify-between mb-4 items-center"> 
                         <h1 className="font-bold text-2xl inline-block">Forms</h1>
-                        <Button onClick={() => openModal(null)}>+</Button>
+                        <div className="flex gap-4"> {/* Adjusted button gap */}
+                            <button
+                                onClick={() => deleteForm(checkedFormId)}
+                                className="bg-transparent text-gray-500 hover:bg-gray-100 rounded-md px-3 py-2"
+                            >
+                                <FontAwesomeIcon icon={faTrash} size="lg" />
+                            </button> 
+                            <button
+                                onClick={() => openModal(null)}
+                                className="bg-transparent text-purple-800 hover:bg-gray-100 rounded-md px-3 py-2"
+                            >
+                                <FontAwesomeIcon icon={faPlus} size="xl" />
+                            </button> 
+                        </div>
                     </div>
                     {isModalOpen && (
                         <CreateForm
@@ -70,16 +96,13 @@ function FormList(){
                                 <th scope="col" className="w-1/12 px-6 py-4">
                                     <input type="checkbox" className="form-checkbox" />
                                 </th>
-                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider"> {/* Adjusted column width */}
                                     File Name
                                 </th>
-                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider"> {/* Adjusted column width */}
                                     Number of Responses
                                 </th>
-                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                                    Last Opened
-                                </th>
-                                <th scope="col" className="w-2/12 px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                <th scope="col" className="w-4/12 px-4 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider"> {/* Adjusted column width */}
                                     Details
                                 </th>
                             </tr>
@@ -96,43 +119,29 @@ function FormList(){
                                                 onChange={() => toggleCheck(item.id)}
                                             />
                                         </td>
-                                        <td className="w-3/12 px-6 py-4 whitespace-nowrap">
+                                        <td className="w-4/12 px-6 py-4 whitespace-nowrap"> {/* Adjusted column width */}
                                             <div className="text-left text-sm font-medium text-gray-900">{item.name}</div>
                                         </td>
-                                        <td className="w-3/12 px-6 py-4 whitespace-nowrap">
+                                        <td className="w-4/12 px-6 py-4 whitespace-nowrap"> {/* Adjusted column width */}
                                             <div className="text-left text-sm text-gray-900">{item.responses}</div>
                                         </td>
-                                        <td className="w-3/12 px-6 py-4 whitespace-nowrap">
-                                            <div className="text-left text-sm text-gray-900">
-                                                {new Date(item.submissionTime).toLocaleDateString('en-US', {
-                                                    year: 'numeric',
-                                                    month: 'long',
-                                                    day: 'numeric'
-                                                })} {new Date(item.submissionTime).toLocaleTimeString('en-US', {
-                                                    hour: '2-digit',
-                                                    minute: '2-digit',
-                                                    hour12: true
-                                                })}
-                                            </div>
-                                        </td>
-                                        <td className="w-2/12 px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button
-                                                className="flex flex-col items-center justify-center space-y-1"
-                                                onClick={() => toggleExpand(item.id)}
+                                        <td className="w-3/12 px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button
+                                            onClick={() => toggleExpand(item.id)}
+                                            className="flex flex-col text-gray-500 items-center justify-center space-y-1 px-2"
                                             >
-                                                <div className="h-0.5 w-6 bg-slate-400"></div>
-                                                <div className="h-0.5 w-6 bg-slate-400"></div>
-                                                <div className="h-0.5 w-6 bg-slate-400"></div>
-                                            </button>
+                                            <FontAwesomeIcon icon={faBars} size="xl" />
+                                            </button> 
                                         </td>
                                     </tr>
                                     {expandedFormId === item.id && (
                                         <tr>
                                             <td colSpan="5" className="px-6 py-4">
                                                 <div className="bg-gray-100 shadow-inner p-4 rounded-lg">
-                                                    <span className="block"><span className="font-semibold">Form Description:</span> {item.description}</span>
-                                                    <a className="block"><span className="font-semibold">Invite Link:</span> {submitFormWebsiteDomain}?code={item.id}</a>
-                                                    <a className="block"><span className="font-semibold">Review Link:</span> {reviewFormWebsiteDomain}?code={item.id}</a>
+                                                <span className="block"><span className="font-semibold">Form Description:</span> {item.description}</span>
+                                                <a href={`${submitFormWebsiteDomain}?code=${item.id}`} className="block"><span className="font-semibold">Invite Link:</span> <span className="text-blue-500 underline">{submitFormWebsiteDomain}?code={item.id}</span></a>
+                                                <a href={`${reviewFormWebsiteDomain}?code=${item.id}`} className="block"><span className="font-semibold">Review Link:</span> <span className="text-blue-500 underline">{reviewFormWebsiteDomain}?code={item.id}</span></a>
+
                                                 </div>
                                             </td>
                                         </tr>

@@ -1,11 +1,20 @@
 import React from 'react';
 import Button from './Button';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Navbar = () => {
-    const handleClick = () => {
-        window.location.href = '/Login';
-      };
-      
+    const { data: session } = useSession();
+
+    const handleLogin = () => {
+        signIn();
+    };
+
+    const handleLogout = () => {
+        signOut();
+    };
+
     return (
         <>
             <style>
@@ -21,7 +30,7 @@ const Navbar = () => {
 
                     .nav-brand {
                         font-size: 30px;
-                        background: #8302E1;
+                        background-image: linear-gradient(to right, #27005D, #9D76C1);
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         font-weight: bold;
@@ -32,14 +41,36 @@ const Navbar = () => {
                         padding: 23px 15px;
                         font-size: 18px;
                     }
+                    .nav-right {
+                        margin-left: auto;
+                        display: flex;
+                        align-items: center;
+                    }
                 `}
             </style>
             <nav className="navbar">
-                <div className="nav-brand">Admin-AI</div>
-                <Button onClick={handleClick} className="button">Login</Button>
+                <div className="flex items-center">
+                    <div className="nav-brand">Admin-AI</div>
+                    <button
+                        onClick={() => {
+                            window.location.href = '/Home';
+                        }}
+                        className="home-button"
+                    >
+                        <FontAwesomeIcon icon={faHome} />
+                    </button>
+                </div>
+                <div className="nav-right">
+                    {session ? (
+                        <Button onClick={handleLogout} className="button">Logout</Button>
+                    ) : (
+                        <Button onClick={handleLogin} className="button">Login</Button>
+                    )}
+                </div>
             </nav>
         </>
     );
 };
 
 export default Navbar;
+
