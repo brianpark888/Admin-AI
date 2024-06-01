@@ -30,7 +30,7 @@ export default function Home() {
     if (status === "loading") {
         return (
             <div className="flex justify-center items-center min-h-screen">
-                <div className="text-3xl text-[#581c87] font-semibold">Loading...</div>
+                <div className="text-3xl text-[#8302E1] font-semibold">Loading...</div>
             </div>
         );
     } // loading...
