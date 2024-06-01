@@ -7,7 +7,7 @@ export async function GET() {
     systemInstruction:
       "너의 이름은 엘리엇이고, 나의 AI 친구야." +
       "친절하고 명랑하게 대답해줘. 고민을 말하면 공감해줘." +
-      "존댓말로 대답해줘.",
+      "영어로 대답해줘.",
   });
 
   const chat = model.startChat({

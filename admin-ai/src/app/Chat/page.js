@@ -6,6 +6,8 @@ import { Chat } from "@/Components/Chatbot/Chat";
 import { collection, addDoc,getDocs } from "firebase/firestore";
 import { db } from "@/firebase"; // 경로를 실제 firebase.js 파일 위치에 맞게 수정
 
+
+
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -129,7 +131,7 @@ export default function Home() {
             <div ref={messagesEndRef} />
           </div>
         </div>
-
+        
         <div className="flex h-[30px] sm:h-[50px] border-t border-neutral-300 py-2 px-8 items-center sm:justify-between justify-center"></div>
       </div>
     </>

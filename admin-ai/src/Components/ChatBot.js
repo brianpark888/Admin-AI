@@ -1,40 +1,36 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Chat } from "@/Components/Chatbot/Chat";
-import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
+import { collection, addDoc, doc, getDocs, query, orderBy, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase";
-
+import Button from "./Button";
 const ChatBot = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  const fetchMessages = async () => {
+    try {
+      const querySnapshot = await collection(db, "messages");
+      const q = query(querySnapshot, orderBy("timestamp"));
+      const results = await getDocs(q);
+      const fetchedMessages = [];
+
+      results.forEach((doc) => {
+        fetchedMessages.push(doc.data());
+      });
+
+      setMessages(fetchedMessages);
+    } catch (error) {
+      console.error("Error fetching messages from Firebase: ", error);
+    }
   };
-
-const fetchMessages = async () => {
-  try {
-    const querySnapshot = await collection(db, "messages");
-    const q= query(querySnapshot, orderBy("timestamp"));
-    const results= await getDocs(q);
-    const fetchedMessages = [];
-    
-    results.forEach((doc) => {
-      fetchedMessages.push(doc.data());
-    });
-    
-    setMessages(fetchedMessages);
-  } catch (error) {
-    console.error("Error fetching messages from Firebase: ", error);
-  }
-};
-
 
   const handleSend = async (message) => {
     const updatedMessages = [...messages, message];
     setMessages(updatedMessages);
     setLoading(true);
+    console.log(updatedMessages);
 
     try {
       await addDoc(collection(db, "messages"), {
@@ -53,7 +49,7 @@ const fetchMessages = async () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          messages: updatedMessages.slice(1),
+          messages: updatedMessages,
         }),
       });
 
@@ -88,32 +84,22 @@ const fetchMessages = async () => {
     }
   };
 
-  const handleReset = async () => {
-    const initialMessage = {
-      role: "model",
-      parts: [{ text: "" }],
-    };
+
   
-    try {
-      const querySnapshot = await getDocs(collection(db, "messages"));
-      const fetchedMessages = [];
-      querySnapshot.forEach((doc) => {
-        fetchedMessages.push(doc.data());
-      });
+  async function deleteCollection() {
+    const msgCollection = await collection(db, "messages");
+    const q = query(msgCollection)
+    const messages= await getDocs(q);
+    
+    messages.forEach((message)=>{
+      deleteDoc(doc(db, "messages", message.id))
+    })
+    setMessages([]);
+  }
   
-      setMessages([initialMessage, ...fetchedMessages]);
-    } catch (error) {
-      console.error("Error fetching messages from Firebase: ", error);
-      setMessages([initialMessage]);
-    }
-  };
 
   useEffect(() => {
     fetchMessages();
-  }, []);
-
-  useEffect(() => {
-    handleReset();
   }, []);
 
   return (
@@ -127,6 +113,7 @@ const fetchMessages = async () => {
               onSendMessage={handleSend}
             />
             <div ref={messagesEndRef} />
+            <Button onClick={deleteCollection}>Delete Collection</Button>
           </div>
         </div>
       </div>
