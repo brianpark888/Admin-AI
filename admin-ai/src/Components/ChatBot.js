@@ -4,10 +4,9 @@ import { Chat } from "@/Components/Chatbot/Chat";
 import { collection, addDoc, doc, getDocs, query, orderBy, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "./Button";
-const ChatBot = ({formId, formQuestion, formPrompt}) => {
+const ChatBot = ({formId, formQuestion}) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [formId, setFormId] = useState(null); // State variable for formId
   const messagesEndRef = useRef(null);
   const [responses, setResponses] = useState("");
   const chatPrompt = `I will give you responses to a question. This is the Question: ${formQuestion}. Responses: ${responses} I will also give you prompts to help query responses that fit criterias set in`;
@@ -37,7 +36,6 @@ const ChatBot = ({formId, formQuestion, formPrompt}) => {
     // Run this code only on the client side
     const urlParams = new URLSearchParams(window.location.search);
     const formId = urlParams.get('code');
-    setFormId(formId);
   }, []);
 
   useEffect(() => {
