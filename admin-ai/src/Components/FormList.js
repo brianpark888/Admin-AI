@@ -64,7 +64,7 @@ function FormList(){
       return (
         <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">
             <div className='relative w-full max-w-7xl'>
-                <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div>
+                <div className='bg-[#581c87] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div>
                 <div className='bg-white shadow-sm p-7 rounded-lg z-10 w-full h-auto'>
                 <div className="w-full flex justify-between mb-4 items-center"> 
                         <h1 className="font-bold text-2xl inline-block">Forms</h1>
@@ -77,7 +77,7 @@ function FormList(){
                             </button> 
                             <button
                                 onClick={() => openModal(null)}
-                                className="bg-transparent text-purple-800 hover:bg-gray-100 rounded-md px-3 py-2"
+                                className="bg-transparent text-[#581c87] hover:bg-gray-100 rounded-md px-3 py-2"
                             >
                                 <FontAwesomeIcon icon={faPlus} size="xl" />
                             </button> 

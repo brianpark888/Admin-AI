@@ -19,7 +19,7 @@ function LoginPage() {
         <SessionProvider>
             <Navbar />
             <div className="flex justify-center items-start min-h-screen mt-20">
-                <div className="relative bg-white rounded-lg shadow-lg text-center font-semibold text-xl w-96 p-10">
+                <div className="relative bg-white rounded-lg shadow-lg text-center text-lg font-normal w-96 p-10">
                     {session ? (
                         <>
                             <div>Signed in as {session.user.name}</div>
@@ -32,7 +32,7 @@ function LoginPage() {
                         </>
                     ) : (
                         <>
-                            <div className="m-4">If not signed in...</div>
+                            <div className="m-4 text-lg font-normal">Please Log in to use Admin-AI</div>
                             <div 
                                 onClick={() => signIn()} 
                                 className="mt-4 cursor-pointer img-button"

@@ -2,12 +2,19 @@
 import React, { useState }  from 'react';
 import Button from '@/Components/Button';
 import Navbar from '@/Components/NavigationBar';
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   const handleClick = () => {
-    window.location.href = '/Login';
+    if (session) {
+      router.push('/Home'); // 이미 로그인된 경우 Home 페이지로 이동
+    } else {
+      signIn(); // 로그인되지 않은 경우 로그인 페이지로 이동
+    }
   };
 
   return (
@@ -33,7 +40,7 @@ export default function Home() {
           <p className="text-lg text-center mb-8">
             Our product uses AI to reduce the time for administrators to process forms sent in by submitters. It ensures that people enter text along a specific format by checking through a chatbot. It also allows admins to process responses quicker.
           </p>
-          <button onClick={handleClick} className='bg-black py-3 px-4 font-bold border-2-[#8302E1] rounded-lg hover:bg-slate-500'>Get Started</button>
+          <Button onClick={handleClick} className='bg-black py-3 px-4 font-semibold border-2-[#581c87] rounded-lg hover:bg-slate-500'>Get Started</Button>
         </div>
       </div>
     </>

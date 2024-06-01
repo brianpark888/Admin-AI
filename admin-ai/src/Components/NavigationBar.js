@@ -1,7 +1,5 @@
 import React from 'react';
 import Button from './Button';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 const Navbar = () => {
@@ -41,26 +39,30 @@ const Navbar = () => {
                         padding: 23px 15px;
                         font-size: 18px;
                     }
+
                     .nav-right {
                         margin-left: auto;
                         display: flex;
                         align-items: center;
+                    }
+
+                    .greeting {
+                        margin-right: 15px;
+                        font-size: 18px;
+                        font-weight: 500;
                     }
                 `}
             </style>
             <nav className="navbar">
                 <div className="flex items-center">
                     <div className="nav-brand">Admin-AI</div>
-                    <button
-                        onClick={() => {
-                            window.location.href = '/Home';
-                        }}
-                        className="home-button"
-                    >
-                        <FontAwesomeIcon icon={faHome} />
-                    </button>
                 </div>
                 <div className="nav-right">
+                    {session && (
+                        <div className="greeting">
+                            Signed in as {session.user.name}
+                        </div>
+                    )}
                     {session ? (
                         <Button onClick={handleLogout} className="button">Logout</Button>
                     ) : (
@@ -73,4 +75,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 

@@ -7,7 +7,7 @@ import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
 
 
-
+const formsCollection = collection(db, 'forms');
 function generateCode() {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   let code = '';
