@@ -4,7 +4,7 @@ import CreateForm from './CreateForm';
 import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
 import { Link } from 'next/link';
-
+import Toast from './Toast'; // Added for toast notification
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'; // Added for trash icon 
 
@@ -18,6 +18,7 @@ function FormList(){
     const [selectedForm, setSelectedForm] = useState(null);
     const [expandedFormId, setExpandedFormId] = useState(null);
     const [checkedFormId, setCheckedFormId] = useState(null); // Added for checkbox interaction
+    const [showToast, setShowToast]= useState(false); 
 
     const getForms  = async () => {
         try {
@@ -64,7 +65,7 @@ function FormList(){
       return (
         <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">
             <div className='relative w-full max-w-7xl'>
-                <div className='bg-[#581c87] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div>
+                <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div>
                 <div className='bg-white shadow-sm p-7 rounded-lg z-10 w-full h-auto'>
                 <div className="w-full flex justify-between mb-4 items-center"> 
                         <h1 className="font-bold text-2xl inline-block">Forms</h1>
@@ -77,7 +78,7 @@ function FormList(){
                             </button> 
                             <button
                                 onClick={() => openModal(null)}
-                                className="bg-transparent text-[#581c87] hover:bg-gray-100 rounded-md px-3 py-2"
+                                className="bg-transparent text-[#8302E1] hover:bg-gray-100 rounded-md px-3 py-2"
                             >
                                 <FontAwesomeIcon icon={faPlus} size="xl" />
                             </button> 
@@ -97,7 +98,7 @@ function FormList(){
                                     <input type="checkbox" className="form-checkbox" />
                                 </th>
                                 <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider"> {/* Adjusted column width */}
-                                    File Name
+                                    Form Name
                                 </th>
                                 <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider"> {/* Adjusted column width */}
                                     Number of Responses
@@ -110,7 +111,7 @@ function FormList(){
                         <tbody className="bg-white divide-y divide-gray-200">
                             {form.map((item, id) => (
                                 <>
-                                    <tr key={id} className={checkedFormId === item.id ? "bg-gray-100" : ""}>
+                                    <tr key={id} className={`${checkedFormId === item.id ? "bg-gray-100" : ""} hover:bg-gray-50`}>
                                         <td className="w-1/12 px-11 py-4">
                                             <input
                                                 type="checkbox"
@@ -137,12 +138,30 @@ function FormList(){
                                     {expandedFormId === item.id && (
                                         <tr>
                                             <td colSpan="5" className="px-6 py-4">
-                                                <div className="bg-gray-100 shadow-inner p-4 rounded-lg">
-                                                <span className="block"><span className="font-semibold">Form Description:</span> {item.description}</span>
-                                                <a href={`${submitFormWebsiteDomain}?code=${item.id}`} className="block"><span className="font-semibold">Invite Link:</span> <span className="text-blue-500 underline">{submitFormWebsiteDomain}?code={item.id}</span></a>
-                                                <a href={`${reviewFormWebsiteDomain}?code=${item.id}`} className="block"><span className="font-semibold">Review Link:</span> <span className="text-blue-500 underline">{reviewFormWebsiteDomain}?code={item.id}</span></a>
+                                            <div className="bg-gray-100 shadow-inner p-4 rounded-lg">
+                                            <div className="block mb-4">
+                                                <div className="font-semibold mb-2">Description:</div>
+                                                <div>- {item.description}</div>
+                                            </div>
+                                            <div className="flex justify-between items-center my-10 w-full">
+                                                <button 
+                                                onClick={() => {navigator.clipboard.writeText(`${submitFormWebsiteDomain}?code=${item.id}`)
+                                                                setShowToast(true)}}
+                                                className="flex-grow-0 mx-auto px-4 py-2 bg-[#8302E1] hover:bg-[#A93AFF] font-weight:580 text-white rounded-3xl w-1/3 inline-block mx-2"
+                                                >
+                                                Copy Invite Link
+                                                </button>
+                                                {showToast && <Toast message="Invite Link Copied" isVisible={true} />}
 
-                                                </div>
+                                                <button 
+                                                onClick={() => window.location.href = `${reviewFormWebsiteDomain}?code=${item.id}`}
+                                                className=" flex-grow-0 mx-auto px-4 py-2 bg-[#8302E1] hover:bg-[#A93AFF] font-weight:580 text-white rounded-3xl w-1/3 inline-block"
+                                                >
+                                                Go to Submissions
+                                                </button>
+                                            </div>
+                                            </div>
+
                                             </td>
                                         </tr>
                                     )}

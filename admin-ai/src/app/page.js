@@ -40,7 +40,7 @@ export default function Home() {
           <p className="text-lg text-center mb-8">
             Our product uses AI to reduce the time for administrators to process forms sent in by submitters. It ensures that people enter text along a specific format by checking through a chatbot. It also allows admins to process responses quicker.
           </p>
-          <Button onClick={handleClick} className='bg-black py-3 px-4 font-semibold border-2-[#581c87] rounded-lg hover:bg-slate-500'>Get Started</Button>
+          <Button onClick={handleClick} className='bg-black py-3 px-4 font-semibold border-2-[#8302E1] rounded-lg hover:bg-slate-500'>Get Started</Button>
         </div>
       </div>
     </>
