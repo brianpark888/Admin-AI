@@ -148,7 +148,7 @@ function FormList(){
                                                 <button 
                                                 onClick={() => {navigator.clipboard.writeText(`${submitFormWebsiteDomain}?code=${item.id}`)
                                                                 setShowToast(true)}}
-                                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 w-1/2 inline-block mx-2"
+                                                className="px-4 py-2 bg-blue-500 text-white rounded-3xl hover:bg-blue-600 w-1/2 inline-block mx-2"
                                                 >
                                                 Copy Invite Link
                                                 </button>
@@ -156,7 +156,7 @@ function FormList(){
 
                                                 <button 
                                                 onClick={() => window.location.href = `${reviewFormWebsiteDomain}?code=${item.id}`}
-                                                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-1/2 inline-block"
+                                                className="px-4 py-2 bg-green-500 text-white rounded-3xl hover:bg-green-600 w-1/2 inline-block"
                                                 >
                                                 Go to Submissions
                                                 </button>
