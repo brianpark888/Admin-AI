@@ -29,9 +29,6 @@ export default function Home() {
     return (
         <>
             <Navbar />
-            <div className="flex justify-center items-center">
-                <Button>Logout</Button>
-            </div>
             <FormList></FormList>
         </>
     );
