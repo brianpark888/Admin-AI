@@ -4,20 +4,35 @@ import { Chat } from "@/Components/Chatbot/Chat";
 import { collection, addDoc, doc, getDocs, query, orderBy, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import Button from "./Button";
+
 const ChatBot = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [formId, setFormId] = useState(null); // State variable for formId
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    // Run this code only on the client side
+    const urlParams = new URLSearchParams(window.location.search);
+    const formId = urlParams.get('code');
+    setFormId(formId);
+  }, []);
+
+  useEffect(() => {
+    if (formId) {
+      fetchMessages();
+    }
+  }, [formId]);
 
   const fetchMessages = async () => {
     try {
-      const querySnapshot = await collection(db, "messages");
-      const q = query(querySnapshot, orderBy("timestamp"));
+      const messagesRef = collection(db, "forms", formId, "messages");
+      const q = query(messagesRef, orderBy("timestamp"));
       const results = await getDocs(q);
       const fetchedMessages = [];
 
       results.forEach((doc) => {
-        fetchedMessages.push(doc.data());
+        fetchedMessages.push({ role: doc.data().role, parts: doc.data().parts });
       });
 
       setMessages(fetchedMessages);
@@ -33,7 +48,7 @@ const ChatBot = () => {
     console.log(updatedMessages);
 
     try {
-      await addDoc(collection(db, "messages"), {
+      await addDoc(collection(db, "forms", formId, "messages"), {
         role: message.role,
         parts: message.parts,
         timestamp: new Date(),
@@ -68,7 +83,7 @@ const ChatBot = () => {
       setMessages((messages) => [...messages, result]);
 
       try {
-        await addDoc(collection(db, "messages"), {
+        await addDoc(collection(db, "forms", formId, "messages"), {
           role: result.role,
           parts: result.parts,
           timestamp: new Date(),
@@ -84,23 +99,22 @@ const ChatBot = () => {
     }
   };
 
+  const deleteCollection = async () => {
+    try {
+      const messagesRef = collection(db, "forms", formId, "messages");
+      const q = query(messagesRef);
+      const messagesSnapshot = await getDocs(q);
 
-  
-  async function deleteCollection() {
-    const msgCollection = await collection(db, "messages");
-    const q = query(msgCollection)
-    const messages= await getDocs(q);
-    
-    messages.forEach((message)=>{
-      deleteDoc(doc(db, "messages", message.id))
-    })
-    setMessages([]);
-  }
-  
+      const deletePromises = messagesSnapshot.docs.map((message) =>
+        deleteDoc(doc(db, "forms", formId, "messages", message.id))
+      );
 
-  useEffect(() => {
-    fetchMessages();
-  }, []);
+      await Promise.all(deletePromises);
+      setMessages([]);
+    } catch (error) {
+      console.error("Error deleting collection: ", error);
+    }
+  };
 
   return (
     <>
