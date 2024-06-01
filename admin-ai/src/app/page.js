@@ -1,9 +1,10 @@
 "use client";
-import React from 'react';
-import Button from '../Components/Button';
-import Navbar from '../Components/NavigationBar';
+import React, { useState }  from 'react';
+import Button from '@/Components/Button';
+import Navbar from '@/Components/NavigationBar';
 
 export default function Home() {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const handleClick = () => {
     window.location.href = '/Login';
@@ -14,12 +15,12 @@ export default function Home() {
       <style>
         {`
           .full-width-section {
-            background: #A93AFF;
+            background: linear-gradient(45deg, #A269B9, #9669BD, #5868D4, #8728E1, #7A20E1, #7021ff, #5306E0);
             margin: 0;
             padding: 110px 0;
             color: white;
             text-align: center;
-            animation: moveBackground 15s infinite alternate;
+            animation: moveBackground 10s infinite alternate;
             background-size: 400% 400%;
           }
 
@@ -32,7 +33,7 @@ export default function Home() {
           <p className="text-lg text-center mb-8">
             Our product uses AI to reduce the time for administrators to process forms sent in by submitters. It ensures that people enter text along a specific format by checking through a chatbot. It also allows admins to process responses quicker.
           </p>
-          <button onClick={handleClick} className='bg-black py-3 px-4 font-bold border-2-[#8302E1] rounded-lg hover:bg-slate-700'>Get Started</button>
+          <button onClick={handleClick} className='bg-black py-3 px-4 font-bold border-2-[#8302E1] rounded-lg hover:bg-slate-500'>Get Started</button>
         </div>
       </div>
     </>
