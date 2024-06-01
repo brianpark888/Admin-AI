@@ -111,7 +111,7 @@ function FormList(){
                         <tbody className="bg-white divide-y divide-gray-200">
                             {form.map((item, id) => (
                                 <>
-                                    <tr key={id} className={checkedFormId === item.id ? "bg-gray-100" : ""}>
+                                    <tr key={id} className={`${checkedFormId === item.id ? "bg-gray-100" : ""} hover:bg-gray-50`}>
                                         <td className="w-1/12 px-11 py-4">
                                             <input
                                                 type="checkbox"
@@ -143,12 +143,11 @@ function FormList(){
                                                 <div className="font-semibold mb-2">Description:</div>
                                                 <div>- {item.description}</div>
                                             </div>
-
-                                            <div className="flex">
+                                            <div className="flex justify-between items-center my-10 w-full">
                                                 <button 
                                                 onClick={() => {navigator.clipboard.writeText(`${submitFormWebsiteDomain}?code=${item.id}`)
                                                                 setShowToast(true)}}
-                                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 w-1/2 inline-block mx-2"
+                                                className="flex-grow-0 mx-auto px-4 py-2 bg-[#8302E1] hover:bg-[#A93AFF] font-weight:580 text-white rounded-3xl w-1/3 inline-block mx-2"
                                                 >
                                                 Copy Invite Link
                                                 </button>
@@ -156,7 +155,7 @@ function FormList(){
 
                                                 <button 
                                                 onClick={() => window.location.href = `${reviewFormWebsiteDomain}?code=${item.id}`}
-                                                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-1/2 inline-block"
+                                                className=" flex-grow-0 mx-auto px-4 py-2 bg-[#8302E1] hover:bg-[#A93AFF] font-weight:580 text-white rounded-3xl w-1/3 inline-block"
                                                 >
                                                 Go to Submissions
                                                 </button>
