@@ -1,11 +1,10 @@
 "use client";
-
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Chat } from "@/Components/Chatbot/Chat";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "@/firebase"; // 경로를 실제 firebase.js 파일 위치에 맞게 수정
+import { collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "@/firebase";
 
-export default function ChatBot() {
+const ChatBot = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
@@ -13,6 +12,24 @@ export default function ChatBot() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+const fetchMessages = async () => {
+  try {
+    const querySnapshot = await collection(db, "messages");
+    const q= query(querySnapshot, orderBy("timestamp"));
+    const results= await getDocs(q);
+    const fetchedMessages = [];
+    
+    results.forEach((doc) => {
+      fetchedMessages.push(doc.data());
+    });
+    
+    setMessages(fetchedMessages);
+  } catch (error) {
+    console.error("Error fetching messages from Firebase: ", error);
+  }
+};
+
 
   const handleSend = async (message) => {
     const updatedMessages = [...messages, message];
@@ -71,34 +88,51 @@ export default function ChatBot() {
     }
   };
 
-  const handleReset = () => {
-    setMessages([{
+  const handleReset = async () => {
+    const initialMessage = {
       role: "model",
-      parts: [{ text: "안녕? 나는 엘리엇이야. 오늘은 무슨 일이 있었니?" }],
-    }]);
+      parts: [{ text: "" }],
+    };
+  
+    try {
+      const querySnapshot = await getDocs(collection(db, "messages"));
+      const fetchedMessages = [];
+      querySnapshot.forEach((doc) => {
+        fetchedMessages.push(doc.data());
+      });
+  
+      setMessages([initialMessage, ...fetchedMessages]);
+    } catch (error) {
+      console.error("Error fetching messages from Firebase: ", error);
+      setMessages([initialMessage]);
+    }
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    fetchMessages();
+  }, []);
 
   useEffect(() => {
     handleReset();
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex-1 overflow-auto sm:px-10 pb-4 sm:pb-10">
-        <div className="max-w-[800px] mx-auto mt-4 sm:mt-12">
-          <Chat
-            messages={messages}
-            loading={loading}
-            onSendMessage={handleSend}
-          />
-          <div ref={messagesEndRef} />
+    <>
+      <div className="flex flex-col h-screen">
+        <div className="flex-1 overflow-auto sm:px-10 pb-4 sm:pb-10">
+          <div className="max-w-[800px] mx-auto mt-4 sm:mt-12">
+            <Chat
+              messages={messages}
+              loading={loading}
+              onSendMessage={handleSend}
+            />
+            <div ref={messagesEndRef} />
+          </div>
         </div>
+        <div className="flex h-[30px] sm:h-[50px] border-t border-neutral-300 py-2 px-8 items-center sm:justify-between justify-center"></div>
       </div>
-      <div className="flex h-[30px] sm:h-[50px] border-t border-neutral-300 py-2 px-8 items-center sm:justify-between justify-center"></div>
-    </div>
+    </>
   );
-}
+};
+
+export default ChatBot;
