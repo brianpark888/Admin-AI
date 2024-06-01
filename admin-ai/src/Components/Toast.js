@@ -13,7 +13,7 @@ const Toast = ({ message, isVisible, onClose }) => {
   return (
     isVisible && (
       <div className="fixed bottom-4 right-4 z-50">
-        <div className="bg-[#4895ef] text-white py-2 px-4 rounded-md shadow">
+        <div className="bg-[#8302E1] text-white py-2 px-4 rounded-md shadow">
           {message}
         </div>
       </div>

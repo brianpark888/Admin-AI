@@ -2,7 +2,7 @@ import { IconArrowUp } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 
 export const ChatInput = ({ onSendMessage }) => {
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
 
   // 입력창의 속성을 참조하기 위한 ref
   const textareaRef = useRef(null);
@@ -59,8 +59,8 @@ export const ChatInput = ({ onSendMessage }) => {
         onKeyDown={handleKeyDown}
       />
 
-      <button onClick={() => handleSend()}>
-        <IconArrowUp className="absolute right-2 bottom-3 h-8 w-8 hover:cursor-pointer rounded-full p-1 bg-blue-500 text-white hover:opacity-80" />
+      <button onClick={handleSend}>
+        <IconArrowUp className="absolute right-2 bottom-3 h-8 w-8 hover:cursor-pointer rounded-full p-1 text-white hover:opacity-80" style={{ backgroundColor: "#8302E1" }} />
       </button>
     </div>
   );

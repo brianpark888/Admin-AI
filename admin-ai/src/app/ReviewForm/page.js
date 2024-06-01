@@ -2,8 +2,9 @@ import DataTable from "@/Components/DataTable";
 import Navbar from "@/Components/NavigationBar";
 import ChatBot from "@/Components/ChatBot";
 
+
 export default function Home() {
-  return (
+  return (  
       <>
           <Navbar />
           <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">

@@ -10,9 +10,13 @@ export const ChatBubble = ({ message }) => {
         className={`flex items-center ${
           message.role === "model"
             ? "bg-neutral-200 text-neutral-900"
-            : "bg-blue-500 text-white"
-        } rounded-2xl px-3 py-2 max-w-[67%] whitespace-pre-wrap`}
-        style={{ overflowWrap: "anywhere" }}
+            : "text-white"
+        } px-3 py-2 max-w-[67%] whitespace-pre-wrap`}
+        style={{
+          overflowWrap: "anywhere",
+          backgroundColor: message.role !== "model" ? "#8302E1" : "",
+          borderRadius: "8px",
+        }}
       >
         {message.parts[0].text}
       </div>
