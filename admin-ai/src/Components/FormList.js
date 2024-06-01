@@ -148,6 +148,7 @@ function FormList(){
                                                 onClick={() => {navigator.clipboard.writeText(`${submitFormWebsiteDomain}?code=${item.id}`)
                                                                 setShowToast(true)}}
                                                 className="flex-grow-0 mx-auto px-4 py-2 bg-[#8302E1] hover:bg-[#A93AFF] font-weight:580 text-white rounded-3xl w-1/3 inline-block mx-2"
+
                                                 >
                                                 Copy Invite Link
                                                 </button>
@@ -156,6 +157,7 @@ function FormList(){
                                                 <button 
                                                 onClick={() => window.location.href = `${reviewFormWebsiteDomain}?code=${item.id}`}
                                                 className=" flex-grow-0 mx-auto px-4 py-2 bg-[#8302E1] hover:bg-[#A93AFF] font-weight:580 text-white rounded-3xl w-1/3 inline-block"
+
                                                 >
                                                 Go to Submissions
                                                 </button>

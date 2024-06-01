@@ -44,34 +44,43 @@ export default function Home() {
           return (
             <>
                 <Navbar />
-                <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">
-                    <div className="relative w-full max-w-5xl">
-                        <div className="bg-white shadow-md rounded-lg z-10 w-full max-w-7xl p-20">
-                            <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-center items-center min-h-screen p-4">
+                    <div className="bg-white shadow-md rounded-lg max-w-screen-xl w-full p-20">
+                        <div className="mb-6 flex justify-between items-center">
+                            <h1 className="text-3xl font-bold text-left">{formData.formName}</h1>
+                            <div className="flex items-center">
                                 <button
                                     onClick={handleHomeClick}
-                                    className="home-button"
+                                    className="home-button relative top-[-7px]"
                                     aria-label="Home"
                                 >
                                     <FontAwesomeIcon icon={faHome} size="xl" />
                                 </button>
-                                <h1 className="text-2xl font-bold text-center text-decoration-line: underline">{formData.formName}</h1>
-                                <div className="flex items-center">
-                                    <p className="font-md">2024.5.28</p> 
-                                </div>
                             </div>
-                            <p><span className="font-bold">Description: </span>{formData.field}</p>
-                            <hr className="solid"></hr>
-                            <br></br>
-                            <h3 className="text-xl font-bold mb-4">User Response</h3>
-                            {formId && <DataTable formId={formId} />}
-                            <br></br>
-                            <hr className="solid"></hr>
-                            <h3 className="text-xl font-bold mb-4">Chat</h3>
-                            <ChatBot />
                         </div>
-                    </div>
-                </div>
-            </>
-        );
-    }
+                        <div>
+                          <p className="font-md text-lg mt-1 mb-4">2024.5.28</p>
+                        </div>
+                        <p className="mb-4"><span className="font-bold">Description: </span>{formData.field}</p>
+                        <hr className="solid mb-8"></hr>
+                        <div className="flex">
+                          <div className="w-1/2 pr-2"> 
+                              <h3 className="text-xl font-bold mb-2">User Response</h3>
+                                <span className="text-sm mb-2">A collection of submitter information</span> 
+                              <div className="max-w-[800px] mx-auto sm:mt-6"> 
+                                {formId && <DataTable formId={formId} />}
+                              </div>
+                          </div>
+                          <div className="w-1/2 pl-2"> 
+                              <h3 className="text-xl font-bold mb-2">Chat</h3>
+                              <span className="text-sm mb-2">Use the Chatbot to look for desired answers</span> 
+                              <div className="mt-1"> 
+                                  <ChatBot />
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </>
+      );   
+}

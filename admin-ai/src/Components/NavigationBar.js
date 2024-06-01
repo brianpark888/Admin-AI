@@ -29,7 +29,7 @@ const Navbar = () => {
 
                     .nav-brand {
                         font-size: 30px;
-                        background-image: linear-gradient(to right, #27005D, #9D76C1);
+                        background-image: linear-gradient(to right, #8309db, #A594F9                        );
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         font-weight: bold;
