@@ -22,7 +22,7 @@ export default function Home() {
       <style>
         {`
           .full-width-section {
-            background: linear-gradient(45deg, #A269B9, #9669BD, #5868D4, #8728E1, #7A20E1, #7021ff, #5306E0);
+            background: linear-gradient(45deg, #D391FA, #9967CE, #8302E1, #BA9Cf6, #CFB7FF, #ABC0F9, #190087);
             margin: 0;
             padding: 110px 0;
             color: white;
@@ -40,7 +40,7 @@ export default function Home() {
           <p className="text-lg text-center mb-8">
             Our product uses AI to reduce the time for administrators to process forms sent in by submitters. It ensures that people enter text along a specific format by checking through a chatbot. It also allows admins to process responses quicker.
           </p>
-          <Button onClick={handleClick} className='bg-black py-3 px-4 font-semibold border-2-[#8302E1] rounded-lg hover:bg-slate-500'>Get Started</Button>
+          <button onClick={handleClick} className='bg-black py-3 px-4 font-semibold border-2-[#8302E1] rounded-lg hover:bg-slate-500'>Get Started</button>
         </div>
       </div>
     </>
