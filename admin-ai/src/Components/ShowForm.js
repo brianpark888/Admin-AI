@@ -6,12 +6,13 @@ import Button from "./Button";
 import Toast from './Toast';
 import FinishSubmission from './FinishSubmission';
 
-const ShowForm = ({ formId, formName, formQuestion }) => {
+const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [field, setField] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [result, setResult] = useState(''); // Add a new state to hold the result of the submission [1
 
   const handleChange = (event, setter) => {
     setter(event.target.value);
@@ -25,27 +26,63 @@ const ShowForm = ({ formId, formName, formQuestion }) => {
       return;
     }
 
-    try {
-      // Reference to the 'submissions' subcollection under the specific form document
-      const submissionsRef = collection(db, "forms", formId, "submissions");
-
-      // Add a new submission document to the 'submissions' subcollection
-      const submissionRef = await addDoc(submissionsRef, {
-        name: name,
-        email: email,
-        answer: field,
-        submittedAt: new Date().toISOString()
-      });
-
-      setShowToast(true);
-      setIsVisible(false)
-      setEmail("");
-      setName("");
-      setField("");
-    } catch (error) {
-      console.error("Error submitting form: ", error);
-      alert('Failed to submit the form.');
+    try{
+    const response = await fetch("/api/submit-check", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        input: field,
+        systemInstruction: "You are an AI that ensures that a response follows a certain format for a certain question. Question:"+ formQuestion + "Format:" + formPrompt + "If the response follows the format return '1' else return '0'."
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
     }
+    const unprocessedResult = await response.json();
+    const booleanResult = unprocessedResult.parts[0];
+    setResult(booleanResult);
+
+    if (!result) {
+      return;
+    }
+
+    }catch (e) {
+      console.error("Error fetching chat response: ", e);
+    } finally {
+    }
+    
+
+    if (result == 1){
+      try {
+      
+        // Reference to the 'submissions' subcollection under the specific form document
+        const submissionsRef = collection(db, "forms", formId, "submissions");
+  
+        // Add a new submission document to the 'submissions' subcollection
+        const submissionRef = await addDoc(submissionsRef, {
+          name: name,
+          email: email,
+          answer: field,
+          submittedAt: new Date().toISOString()
+        });
+  
+        setShowToast(true);
+        setIsVisible(false);
+        setEmail("");
+        setName("");
+        setField("");
+      } catch (error) {
+        console.error("Error submitting form: ", error);
+        alert('Failed to submit the form.');
+      }
+    }else{
+      console.log(result)
+      console.error("The response does not follow the format. Please try again.")
+      alert("The response does not follow the format. Please try again.")
+    }
+    
   };
 
   return (
@@ -73,7 +110,9 @@ const ShowForm = ({ formId, formName, formQuestion }) => {
           <Button onClick={handleSubmit}>Submit</Button>
         </form>
       </div>}
+      <p>{JSON.stringify(result)}</p>
       {showToast && <FinishSubmission />}
+      
       
     </div>
   );

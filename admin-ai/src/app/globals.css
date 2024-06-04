@@ -3,17 +3,6 @@
 @tailwind utilities;
 
 /* globals.css */
-.img-button {
-    @apply inline-block transition transform duration-200 filter;
-}
-
-.img-button:hover {
-    @apply scale-105 brightness-125;
-}
-
-.img-button:active {
-    @apply scale-95 brightness-75;
-}
 
 .home-button {
     margin-left: 1px;

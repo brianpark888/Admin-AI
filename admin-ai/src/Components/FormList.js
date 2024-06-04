@@ -12,6 +12,7 @@ const formsCollection = collection(db, 'forms');
 const submitFormWebsiteDomain = "http://localhost:3000/SubmitForm/";
 const reviewFormWebsiteDomain = "http://localhost:3000/ReviewForm/";
 
+
 function FormList() {
     const [form, setForm] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,6 +78,38 @@ function FormList() {
     };
 
     return (
+        <>
+        <style>
+            {`
+                .dropdown {
+                    position: relative;
+                    display: inline-block;
+                }
+                
+                /* Dropdown Content (Hidden by Default) */
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    min-width: 160px;
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                    z-index: 1;
+                }
+                
+                /* Links inside the dropdown */
+                .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+                
+                .dropdown-content a:hover {background-color: #ddd;}
+                
+                .dropdown:hover .dropdown-content {display: block;}
+                
+                .dropdown:hover .dropbtn {background-color: #3e8e41;}
+            `}
+        </style>
         <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">
             <div className='relative w-full max-w-7xl'>
                 <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div>
@@ -109,16 +142,17 @@ function FormList() {
                         <thead className="bg-gray-50">
                             <tr>
                                 <th scope="col" className="w-1/12 px-6 py-4">
-                                    <input type="checkbox" className="form-checkbox" />
                                 </th>
                                 <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider">
                                     Form Name
                                 </th>
                                 <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider">
-                                    Responses
+                                    Description
+                                </th>
+                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider">
+                                    Response
                                 </th>
                                 <th scope="col" className="w-4/12 px-4 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider">
-                                    Details
                                 </th>
                             </tr>
                         </thead>
@@ -134,51 +168,35 @@ function FormList() {
                                                 onChange={() => toggleCheck(item.id)}
                                             />
                                         </td>
-                                        <td className="w-4/12 px-6 py-4 whitespace-nowrap">
+                                        <td className="w-2/12 px-6 py-4 whitespace-nowrap">
                                             <div className="text-left text-sm font-medium text-gray-900">{item.name}</div>
                                         </td>
-                                        <td className="w-3/12 px-6 py-4 whitespace-nowrap">
+                                        <td className="w-4/12 px-6 py-4">
+                                            <div className="text-left text-sm text-gray-900 ">{item.description}</div>
+                                        </td>
+                                        <td className="w-2/12 px-6 py-4 whitespace-nowrap">
                                             <div className="text-left text-sm text-gray-900">{item.submissionsCount}</div>
                                         </td>
                                         <td className="w-4/12 px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button
-                                                onClick={() => toggleExpand(item.id)}
-                                                className="flex flex-col text-gray-500 items-center justify-center space-y-1 px-2"
-                                            >
-                                                <FontAwesomeIcon icon={faBars} size="xl" />
-                                            </button>
+                                            <div class="dropdown">
+                                                <button
+                                                    onClick={() => toggleExpand(item.id)}
+                                                    className="flex flex-col text-gray-500 items-center justify-center space-y-1 px-2"
+                                                >
+                                                    <FontAwesomeIcon icon={faBars} size="xl" />
+                                                </button>
+                                                <div className="dropdown-content bg-gray-100 hover:bg-gray-50">
+                                                    <a href="#" onClick={() => {
+                                                                        navigator.clipboard.writeText(`${submitFormWebsiteDomain}?code=${item.id}`)
+                                                                        setShowToast(true);
+                                                                    }}>Copy Invite Link</a>
+                                                    <a href="#" onClick={() => window.location.href = `${reviewFormWebsiteDomain}?code=${item.id}`}>Go to Submissions</a>
+                                                </div>
+                                        </div>
                                         </td>
                                     </tr>
-                                    {expandedFormId === item.id && (
-                                        <tr>
-                                            <td colSpan="4" className="px-6 py-4">
-                                                <div className="bg-gray-100 shadow-inner p-4 rounded-lg">
-                                                    <div className="block mb-4">
-                                                        <div className="font-semibold mb-2">Description:</div>
-                                                        <div>- {item.description}</div>
-                                                    </div>
-                                                    <div className="flex justify-between items-center my-10 w-full">
-                                                        <button
-                                                            onClick={() => {
-                                                                navigator.clipboard.writeText(`${submitFormWebsiteDomain}?code=${item.id}`)
-                                                                setShowToast(true);
-                                                            }}
-                                                            className="flex-grow-0 mx-auto px-4 py-2 bg-[#8302E1] hover:bg-[#A93AFF] font-weight:580 text-white rounded-3xl w-1/3 inline-block mx-2"
-                                                        >
-                                                            Copy Invite Link
-                                                        </button>
-                                                        {showToast && <Toast message="Invite Link Copied" isVisible={true} />}
-                                                        <button
-                                                            onClick={() => window.location.href = `${reviewFormWebsiteDomain}?code=${item.id}`}
-                                                            className="flex-grow-0 mx-auto px-4 py-2 bg-[#8302E1] hover:bg-[#A93AFF] font-weight:580 text-white rounded-3xl w-1/3 inline-block"
-                                                        >
-                                                            Go to Submissions
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    )}
+                                    {showToast && <Toast message="Invite Link Copied" isVisible={true} />}
+                                    
                                 </React.Fragment>
                             ))}
                         </tbody>
@@ -186,6 +204,7 @@ function FormList() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

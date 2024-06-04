@@ -23,6 +23,7 @@ export default function Home() {
           setFormData({
             formName: docSnap.data().name,
             field: docSnap.data().field,
+            formPrompt: docSnap.data().prompt,
           });
         } else {
           console.log("No such document!");
@@ -37,7 +38,7 @@ export default function Home() {
     <>
       <div>
         <p>{showForm}</p>
-        {<ShowForm formId={formId} formName={formData.formName} formQuestion={formData.field} />}
+        {<ShowForm formId={formId} formName={formData.formName} formQuestion={formData.field} formPrompt = {formData.formPrompt}/>}
         {<FinishSubmission /> && !showForm}
 
       </div>

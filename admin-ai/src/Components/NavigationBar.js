@@ -21,25 +21,20 @@ const Navbar = () => {
                     .navbar {
                         background-color: #ffffff;
                         box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-                        padding: 6px;
+                        padding: 10px;
                         display: flex;
-                        justify-content: space-between;
-                        align-items: center;
+                        justify-content: center;
                     }
 
                     .nav-brand {
                         font-size: 30px;
-                        background-image: linear-gradient(to right, #8309db, #A594F9                        );
+                        background-image: linear-gradient(to left, #8309db, #FF1971);
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         font-weight: bold;
                         padding: 8px 15px;
                     }
 
-                    .button {
-                        padding: 23px 15px;
-                        font-size: 18px;
-                    }
 
                     .nav-right {
                         margin-left: auto;
@@ -54,7 +49,7 @@ const Navbar = () => {
                     }
                 `}
             </style>
-            <nav className="navbar">
+            <nav class="navbar">
                 <div className="flex items-center">
                     <div className="nav-brand">Admin-AI</div>
                 </div>
