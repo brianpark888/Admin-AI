@@ -3,18 +3,3 @@
 @tailwind utilities;
 
 /* globals.css */
-
-.home-button {
-    margin-left: 1px;
-    margin-top: 2px;
-    background-color: transparent;
-    color: #8302E1;
-    border: none;
-    cursor: pointer;
-    padding: 3px;
-    border-radius: 5px;
-}
-
-.home-button:hover {
-    background-color: #E2E8F0; /* Tailwind's gray-200 */
-}
