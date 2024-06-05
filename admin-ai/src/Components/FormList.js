@@ -157,9 +157,10 @@ function FormList() {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
+                            
                             {form.map((item, id) => (
                                 <React.Fragment key={id}>
-                                    <tr className={`${checkedFormId === item.id ? "bg-gray-100" : ""} hover:bg-gray-50`}>
+                                    <tr className={`${checkedFormId === item.id ? "bg-gray-100" : ""} hover:bg-gray-50 transition-transform transform hover:scale-105 group-hover:shadow-xl duration-300`}>
                                         <td className="w-1/12 px-11 py-4">
                                             <input
                                                 type="checkbox"

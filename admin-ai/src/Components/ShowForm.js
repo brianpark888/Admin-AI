@@ -78,7 +78,6 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
         alert('Failed to submit the form.');
       }
     }else{
-      console.log(result)
       console.error("The response does not follow the format. Please try again.")
       alert("The response does not follow the format. Please try again.")
     }
@@ -110,7 +109,6 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
           <Button onClick={handleSubmit}>Submit</Button>
         </form>
       </div>}
-      <p>{JSON.stringify(result)}</p>
       {showToast && <FinishSubmission />}
       
       
