@@ -110,10 +110,10 @@ function FormList() {
                 .dropdown:hover .dropbtn {background-color: #3e8e41;}
             `}
         </style>
-        <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">
-            <div className='relative w-full max-w-7xl'>
-                <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div>
-                <div className='bg-white shadow-sm p-7 rounded-lg z-10 w-full h-auto'>
+        <div className="flex min-h-screen flex-col items-center justify-between sm:p-24">
+            {/* <div className='relative w-full max-w-7xl'> */}
+                {/* <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div> */}
+                <div className='bg-white p-12 rounded-lg z-10 w-full h-auto border-2 border-gray-100 shadow-lg'>
                     <div className="w-full flex justify-between mb-4 items-center">
                         <h1 className="font-bold text-2xl inline-block">Forms</h1>
                         <div className="flex gap-4">
@@ -139,20 +139,20 @@ function FormList() {
                         />
                     )}
                     <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
+                        <thead className="bg-[#201925]">
                             <tr>
                                 <th scope="col" className="w-1/12 px-6 py-4">
                                 </th>
-                                <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider">
+                                <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider">
                                     Form Name
                                 </th>
-                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider">
+                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider">
                                     Description
                                 </th>
-                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider">
+                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider">
                                     Response
                                 </th>
-                                <th scope="col" className="w-4/12 px-4 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider">
+                                <th scope="col" className="w-4/12 px-4 py-3 text-left text-sm font-medium text-white uppercase tracking-wider">
                                 </th>
                             </tr>
                         </thead>
@@ -160,7 +160,7 @@ function FormList() {
                             
                             {form.map((item, id) => (
                                 <React.Fragment key={id}>
-                                    <tr className={`${checkedFormId === item.id ? "bg-gray-100" : ""} hover:bg-gray-50`}>
+                                    <tr className={`${checkedFormId === item.id ? "bg-gray-100" : ""} hover:bg-gray-100`}>
                                         <td className="w-1/12 px-11 py-4">
                                             <input
                                                 type="checkbox"
@@ -203,7 +203,7 @@ function FormList() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            {/* </div> */}
         </div>
         </>
     );
