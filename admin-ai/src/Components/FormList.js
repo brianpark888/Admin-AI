@@ -6,7 +6,7 @@ import { collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy,
 import { Link } from 'next/link';
 import Toast from './Toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBarsProgress, faBarsStaggered, faCaretDown, faFileAlt, faFileClipboard, faPlus, faShare, faShareAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const formsCollection = collection(db, 'forms');
 const submitFormWebsiteDomain = "http://localhost:3000/SubmitForm/";
@@ -110,22 +110,22 @@ function FormList() {
                 .dropdown:hover .dropbtn {background-color: #3e8e41;}
             `}
         </style>
-        <div className="flex min-h-screen flex-col items-center justify-between sm:p-24">
+        <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 bg-white">
             {/* <div className='relative w-full max-w-7xl'> */}
                 {/* <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div> */}
-                <div className='bg-white p-12 rounded-lg z-10 w-full h-auto border-2 border-gray-100 shadow-lg'>
-                    <div className="w-full flex justify-between mb-4 items-center">
-                        <h1 className="font-bold text-2xl inline-block">Forms</h1>
+                <div className='bg-white rounded-2xl z-10 w-4/5 h-auto border-2 border-gray-100 shadow-lg'>
+                    <div className="w-full flex justify-between items-center border-2-black px-12 pt-12 pb-2 bg-[#A93AFF] rounded-sm">
+                        <h1 className="font-bold text-2xl inline-block text-white">Your Forms</h1>
                         <div className="flex gap-4">
                             <button
                                 onClick={() => deleteForm(checkedFormId)}
-                                className="bg-transparent text-gray-500 hover:bg-gray-100 rounded-md px-3 py-2"
+                                className="bg-transparent text-white border-2 border-transparent hover:border-white rounded-md px-3 py-2"
                             >
                                 <FontAwesomeIcon icon={faTrash} size="lg" />
                             </button>
                             <button
                                 onClick={() => openModal(null)}
-                                className="bg-transparent text-[#8302E1] hover:bg-gray-100 rounded-md px-3 py-2"
+                                className="bg-transparent text-white border-2 border-transparent hover:border-white rounded-md px-3 py-2"
                             >
                                 <FontAwesomeIcon icon={faPlus} size="xl" />
                             </button>
@@ -182,16 +182,17 @@ function FormList() {
                                             <div class="dropdown">
                                                 <button
                                                     onClick={() => toggleExpand(item.id)}
-                                                    className="flex flex-col text-gray-500 items-center justify-center space-y-1 px-2"
+                                                    className="flex flex-col text-gray-500 items-center justify-center space-y-1 px-2 text-black"
                                                 >
-                                                    <FontAwesomeIcon icon={faBars} size="xl" />
+                                                    <FontAwesomeIcon icon={faCaretDown} size="xl" />
                                                 </button>
-                                                <div className="dropdown-content bg-gray-100 hover:bg-gray-50">
+                                                <div className="dropdown-content">
                                                     <a href="#" onClick={() => {
                                                                         navigator.clipboard.writeText(`${submitFormWebsiteDomain}?code=${item.id}`)
                                                                         setShowToast(true);
-                                                                    }}>Copy Invite Link</a>
-                                                    <a href="#" onClick={() => window.location.href = `${reviewFormWebsiteDomain}?code=${item.id}`}>Go to Submissions</a>
+                                                                    }}><FontAwesomeIcon icon={faFileClipboard} size="l" /> Copy Invite Link </a>
+                                                    
+                                                    <a href="#" onClick={() => window.location.href = `${reviewFormWebsiteDomain}?code=${item.id}`}><FontAwesomeIcon icon={faFileAlt} size="l" /> Go to Submissions</a>
                                                 </div>
                                         </div>
                                         </td>

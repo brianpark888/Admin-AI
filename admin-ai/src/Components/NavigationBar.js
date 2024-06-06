@@ -18,9 +18,9 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className= "justify-around flex p-8 bg-[#A93AFF] ">
+            <nav className= "justify-around flex p-8 bg-white border-b-8 border-[#A93AFF]">
                 <div className="flex items-center">
-                    <div className="text-white font-extrabold font-sans font-bold text-3xl">Admin-AI <FontAwesomeIcon icon={faFile} /></div>
+                    <a href="/" className="text-[#A93AFF] font-extrabold font-sans font-bold text-3xl">Admin-AI <FontAwesomeIcon icon={faFile} /></a>
                 </div>
                 <div className="flex justify-center items-center text-white">
                     {session && (
@@ -31,11 +31,11 @@ const Navbar = () => {
                     )}
                     {session ? (
                         // <Button onClick={handleLogout} className="button">Logout</Button>
-                        <FontAwesomeIcon onClick={handleLogout} className="greeting mx-5 font-bold text-3xl hover:cursor-pointer" icon={faSignOutAlt} />
+                        <FontAwesomeIcon onClick={handleLogout} className="greeting mx-5 font-bold text-3xl text-[#A93AFF] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-[#FFC749]" icon={faSignOutAlt} />
                         
                         // <button className='bg-transparent text-white py-2 px-5 rounded border-2 border-white'>Logout</button>
                     ) : (
-                        <FontAwesomeIcon onClick={handleLogin} className="greeting mx-5 font-bold text-3xl hover:cursor-pointer" icon={faSignInAlt} />
+                        <FontAwesomeIcon onClick={handleLogin} className="greeting mx-5 font-bold text-3xl text-[#A93AFF] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-[#FFC749]" icon={faSignInAlt} />
                     )}
                 </div>
             </nav>

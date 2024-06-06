@@ -27,9 +27,7 @@ export default function Home() {
     return (
         <>
             <Navbar />
-            <div className='bg-white'>
-                <FormList></FormList>
-            </div>
+            <FormList></FormList>
             {/* <a href="#" class="group block max-w-xs mx-auto rounded-lg p-6 bg-white ring-1 ring-slate-900/5 shadow-lg space-y-3 hover:bg-[#A93AFF] hover:ring-sky-500">
   <div class="flex items-center space-x-3">
     <svg class="h-6 w-6 stroke-sky-500 group-hover:stroke-white" fill="none" viewBox="0 0 24 24"></svg>
