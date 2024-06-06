@@ -85,10 +85,10 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
   };
 
   return (
-    <div className='flex min-h-screen flex-col items-center justify-between sm:p-24'>
-      {isVisible && <div className="relative bg-white shadow-sm p-7 rounded-lg z-10 w-full max-w-7xl p-20 h-auto">
+    <div className='flex min-h-screen flex-col items-center justify-between sm:p-20 bg-white'>
+      {isVisible && <div className="border-2 border-gray-100 shadow-lg prelative bg-white p-7 rounded-2xl z-10 w-2/5 h-auto">
         <div className="text-center p-5 border-b-2">
-          <h1 className="text-2xl font-bold">{formName}</h1>
+          <h1 className="text-2xl font-bold my-3 text-[#A93AFF]">{formName}</h1>
           <p className="text-gray-600"></p>
           <p>Fill out the entire form</p>
         </div>
@@ -96,17 +96,24 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
         <form className="p-5" onSubmit={handleSubmit}>
           <div className="mb-5">
             <label htmlFor="name" className="block mb-2 font-bold">Name</label>
-            <input type="text" id="name" className="w-full my-4 p-2 border border-gray-300 rounded" value={name} onChange={(e) => handleChange(e, setName)} />
+            <input type="text" id="name" className="w-full my-2 p-2 bg-gray-100 rounded-lg focus:outline-none focus:ring focus:ring-[#A93AFF]" value={name} onChange={(e) => handleChange(e, setName)} />
             
             <label htmlFor="email" className="block mb-2 font-bold">Email</label>
-            <input type="email" id="email" className="w-full p-2 border border-gray-300 rounded" value={email} onChange={(e) => handleChange(e, setEmail)} />
+            <input type="email" id="email" className="w-full  my-2 p-2  bg-gray-100 rounded-lg focus:outline-none focus:ring focus:ring-[#A93AFF]" value={email} onChange={(e) => handleChange(e, setEmail)} />
             
           </div>
           <div className="mb-5">
             <label htmlFor="field" className="block mb-2 font-bold">{formQuestion}</label>
-            <input type="text" id="field" className="w-full p-2 border border-gray-300 rounded" value={field} onChange={(e) => handleChange(e, setField)} />
+            <textarea 
+                id="field" 
+                className="w-full p-10 my-2 bg-gray-100 rounded-lg focus:outline-none focus:ring focus:ring-[#A93AFF] align-top min-h-[40px]" 
+                value={field} 
+                onChange={(e) => handleChange(e, setField)} 
+            />
           </div>
+          <div className='flex justify-center justify-center '>
           <Button onClick={handleSubmit}>Submit</Button>
+          </div>
         </form>
       </div>}
       {showToast && <FinishSubmission />}

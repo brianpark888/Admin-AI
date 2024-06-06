@@ -5,12 +5,23 @@ import Navbar from '@/Components/NavigationBar';
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faArrowAltCircleDown, faArrowCircleRight, faArrowRight, faCertificate, faCirclePlus, faFile, faFileAlt, faFileArrowUp, faFileCode, faPersonBooth, faPlus, faPlusCircle, faRobot} from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faPlus, faFileAlt, } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   const { data: session } = useSession();
   const router = useRouter();
 
+  
+  function scrollDown() {
+    window.scroll({
+      top: document.body.offsetHeight,
+      left: 0, 
+      behavior: 'smooth',
+    });
+  }
+
+
+  
   const handleClick = () => {
     if (session) {
       router.push('/Home'); // 이미 로그인된 경우 Home 페이지로 이동
@@ -43,7 +54,7 @@ export default function Home() {
               <button type="button" onClick={handleClick} class="text-white bg-[#A93AFF] font-medium rounded-lg px-5 py-4 text-center hover:bg-[#A93AFF] hover:drop-shadow-md transition duration-300 ease-in-out">
                 Create Form  <FontAwesomeIcon icon={faPlus} />
               </button>
-              <button type="button" class="ml-4 text-gray-900 bg-gray-200 font-medium rounded-lg px-5 py-4 text-center hover:bg-gray-300 hover:drop-shadow-md transition duration-300 ease-in-out">
+              <button onClick={scrollDown} type="button" class="ml-4 text-gray-900 bg-gray-200 font-medium rounded-lg px-5 py-4 text-center hover:bg-gray-300 hover:drop-shadow-md transition duration-300 ease-in-out">
                 Learn More <FontAwesomeIcon icon={faArrowRight} />
               </button>
             </div>
@@ -106,18 +117,6 @@ export default function Home() {
     <footer class="bg-black w-full p-4 text-white text-center">
         © 2024 Admin-AI. All Rights Reserved.
     </footer>
-      
-      {/* <div class="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#A93AFF_80%)]">
-        <div className="min-h-screen flex flex-col items-center justify-center text-black">
-            <div className="w-2/3 flex flex-col items-center">
-              <h1 className="text-4xl font-bold mb-4"><span>Welcome</span> to Admin AI</h1>
-              <p className="text-lg text-center mb-8">
-                Our product uses AI to reduce the time for administrators to process forms sent in by submitters. It ensures that people enter text along a specific format by checking through a chatbot. It also allows admins to process responses quicker.
-              </p>
-              <Button onClick={handleClick}>Get Started</Button>
-            </div>
-          </div>
-      </div> */}
     </div>
   </>
   );
