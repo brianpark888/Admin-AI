@@ -36,8 +36,8 @@ export default function Home() {
     <div class="absolute top-0 right-0 m-5">
     <div class="bg-gray-200 shadow-md rounded-lg">
         <ul class="flex space-x-4 p-4">
-            <li><a href="#About" class="text-gray-700 hover:text-blue-500">About</a></li>
-            <li><a href="#Login" class="text-gray-700 hover:text-blue-500">Login</a></li>
+            <li><a href="#" onClick={scrollDown} class="text-gray-700 hover:text-[#A93AFF]">About</a></li>
+            <li><a href="#Login" class="text-gray-700 hover:text-[#A93AFF]">Login</a></li>
         </ul>
     </div>
 </div>
@@ -51,10 +51,10 @@ export default function Home() {
             Our product uses AI to reduce the time for administrators to process forms sent in by submitter by ensuring proper formating and faster response processing.  
             </p>
             <div class="flex justify-center mt-14 lg:justify-start">
-              <button type="button" onClick={handleClick} class="text-white bg-[#A93AFF] font-medium rounded-lg px-5 py-4 text-center hover:bg-[#A93AFF] hover:drop-shadow-md transition duration-300 ease-in-out">
+              <button type="button" onClick={handleClick} class="text-white bg-[#A93AFF] font-medium rounded-lg px-5 py-4 text-center hover:bg-[#A93AFF]/75 hover:drop-shadow-md transition duration-300 ease-in-out">
                 Create Form  <FontAwesomeIcon icon={faPlus} />
               </button>
-              <button onClick={scrollDown} type="button" class="ml-4 text-gray-900 bg-gray-200 font-medium rounded-lg px-5 py-4 text-center hover:bg-gray-300 hover:drop-shadow-md transition duration-300 ease-in-out">
+              <button onClick={scrollDown} type="button" class="ml-4 text-gray-900 bg-gray-200 font-medium rounded-lg px-5 py-4 text-center hover:bg-gray-200/75 hover:drop-shadow-md transition duration-300 ease-in-out">
                 Learn More <FontAwesomeIcon icon={faArrowRight} />
               </button>
             </div>
