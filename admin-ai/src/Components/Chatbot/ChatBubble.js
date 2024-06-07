@@ -14,7 +14,7 @@ export const ChatBubble = ({ message }) => {
         } px-3 py-2 max-w-[67%] whitespace-pre-wrap`}
         style={{
           overflowWrap: "anywhere",
-          backgroundColor: message.role !== "model" ? "#8302E1" : "",
+          backgroundColor: message.role !== "model" ? "#8e7bed" : "",
           borderRadius: "8px",
         }}
       >

@@ -73,7 +73,7 @@ export default function Home() {
               <p className="mb-4 w-4/5"><span className="font-bold">Description: </span>{formData.description}</p>
               <p className="mb-4 w-4/5"><span className="font-bold">Question: </span>{formData.field}</p>
             </div>
-            <button onClick={handleToggleChatBot} className='flex items justify-center text-white bg-[#A93AFF] font-medium rounded-lg px-5 py-3 text-center hover:bg-[#A93AFF]/75 hover:drop-shadow-md transition duration-300 ease-in-out '>
+            <button onClick={handleToggleChatBot} className='flex items justify-center text-white bg-[#8e7bed] font-medium rounded-lg px-5 py-3 text-center hover:bg-[#8e7bed]/75 hover:drop-shadow-md transition duration-300 ease-in-out '>
             ChatBot <FontAwesomeIcon icon={faComment} size="lg" className='ml-2' /> 
             </button>
           </div>
