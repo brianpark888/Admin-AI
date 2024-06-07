@@ -26,7 +26,7 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
       return;
     }
 
-    try{
+    // try{
     // const response = await fetch("/api/submit-check", {
     //   method: "POST",
     //   headers: {
@@ -44,14 +44,14 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
     // const booleanResult = unprocessedResult.parts[0];
     // setResult(booleanResult);
 
-    if (!result) {
-      return;
-    }
+    // if (!result) {
+    //   return;
+    // }
 
-    }catch (e) {
-      console.error("Error fetching chat response: ", e);
-    } finally {
-    }
+    // }catch (e) {
+    //   console.error("Error fetching chat response: ", e);
+    // } finally {
+    // }
     
 
     // if (result == 1){
