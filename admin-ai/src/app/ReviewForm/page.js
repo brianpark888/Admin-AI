@@ -66,17 +66,16 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <p className="font-md text-lg mt-1 mb-4">{formData.creationTime}</p>
+            <p className="font-md text-lg mt-1 mb-4 ">{formData.creationTime}</p>
           </div>
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-4 ">
             <div>
-              <p className="mb-4"><span className="font-bold">Description: </span>{formData.description}</p>
-              <p className="mb-4"><span className="font-bold">Question: </span>{formData.field}</p>
+              <p className="mb-4 w-4/5"><span className="font-bold">Description: </span>{formData.description}</p>
+              <p className="mb-4 w-4/5"><span className="font-bold">Question: </span>{formData.field}</p>
             </div>
-            <Button onClick={handleToggleChatBot} className="flex items-center">
-              {showChatBot ? "Close ChatBot" : "Chat with Bot"}
-              <FontAwesomeIcon icon={faComment} size="lg" className='ml-2' />
-            </Button>
+            <button onClick={handleToggleChatBot} className='flex items justify-center text-white bg-[#A93AFF] font-medium rounded-lg px-5 py-3 text-center hover:bg-[#A93AFF]/75 hover:drop-shadow-md transition duration-300 ease-in-out '>
+            ChatBot <FontAwesomeIcon icon={faComment} size="lg" className='ml-2' /> 
+            </button>
           </div>
           <hr className="solid mb-8"></hr>
           <div className="flex">
