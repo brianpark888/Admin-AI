@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import CreateForm from './CreateForm';
 import { db } from '@/firebase';
-import { collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where } from 'firebase/firestore';
+import { collection, query, doc, getDocs, deleteDoc, orderBy, where } from 'firebase/firestore';
 import { Link } from 'next/link';
 import Toast from './Toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faBarsProgress, faBarsStaggered, faCaretDown, faFileAlt, faFileClipboard, faPlus, faShare, faShareAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
-
+import { faCaretDown, faFileAlt, faFileClipboard, faPlus,  faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useSession } from 'next-auth/react';
 const formsCollection = collection(db, 'forms');
 const submitFormWebsiteDomain = "http://localhost:3000/SubmitForm/";
 const reviewFormWebsiteDomain = "http://localhost:3000/ReviewForm/";
@@ -21,19 +21,25 @@ function FormList() {
     const [expandedFormId, setExpandedFormId] = useState(null);
     const [checkedFormId, setCheckedFormId] = useState(null);
     const [showToast, setShowToast] = useState(false);
+    const { data } = useSession({
+        required: true,
+        onUnauthenticated() {
+          router.replace("/login");
+        },
+      });
 
     const getForms = async () => {
         try {
-            const q = query(formsCollection, orderBy('submissionTime', 'desc'));
+            const q = query(formsCollection, where("username", "==", data.user.name));
             const results = await getDocs(q);
             const newForms = [];
-
+            
             for (const formDoc of results.docs) {
                 const formData = formDoc.data();
                 const submissionsCollection = collection(db, 'forms', formDoc.id, 'submissions');
                 const submissionsSnapshot = await getDocs(submissionsCollection);
                 const submissionsCount = submissionsSnapshot.size;
-
+            
                 newForms.push({
                     id: formDoc.id,
                     name: formData.name,
@@ -42,7 +48,14 @@ function FormList() {
                     submissionsCount: submissionsCount,
                 });
             }
+            
+            // submissionTime 기준으로 정렬
+            newForms.sort((a, b) => {
+                return new Date(b.submissionTime) - new Date(a.submissionTime);
+            });
+            
             setForm(newForms);
+            
         } catch (error) {
             console.error("Failed to fetch forms: ", error);
         }
@@ -116,6 +129,7 @@ function FormList() {
                 <div className='bg-white rounded-2xl z-10 w-4/5 h-auto border-2 border-gray-100 shadow-lg'>
                     <div className="w-full flex justify-between items-center border-2-black px-12 pt-12 pb-2 bg-[#A93AFF] rounded-sm">
                         <h1 className="font-bold text-2xl inline-block text-white">Your Forms</h1>
+                        {/* <h>{data.user.name}</h> */}
                         <div className="flex gap-4">
                             <button
                                 onClick={() => deleteForm(checkedFormId)}

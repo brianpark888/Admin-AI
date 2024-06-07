@@ -37,7 +37,7 @@ export default function Home() {
     <div class="bg-gray-200 shadow-md rounded-lg">
         <ul class="flex space-x-4 p-4">
             <li><a href="#" onClick={scrollDown} class="text-gray-700 hover:text-[#A93AFF]">About</a></li>
-            <li><a href="#Login" class="text-gray-700 hover:text-[#A93AFF]">Login</a></li>
+            <li><a href="Login" class="text-gray-700 hover:text-[#A93AFF]">Login</a></li>
         </ul>
     </div>
 </div>
@@ -66,10 +66,10 @@ export default function Home() {
       </section>
       <section id="Video">
         <div className='h-screen bg-white flex flex-row-2'>
-          <div className=' w-2/5 bg-[#A93AFF] content-center'>
-            <p className="text-center text-white font-bold text-3xl"><FontAwesomeIcon icon={faFileAlt} /></p>
+          <div className=' w-2/5 bg-white content-center'>
+            <img src="/file_image.png" alt="File Icon" />
           </div>
-          <div className=' w-3/5 bg-gray-100 content-center'>
+          <div className=' w-3/5 bg-white content-center'>
             <h1 className="text-center text-[#A93AFF] font-bold text-3xl my-10 font-extrabold font-sans">We Understand Your Pain</h1>
             <div className=' h-auto content-center'>
               <div className='mx-40'>
