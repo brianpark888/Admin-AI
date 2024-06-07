@@ -2,6 +2,8 @@
 import React from 'react';
 import Button from './Button';
 import { useSession, signIn, signOut } from "next-auth/react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFile, faSignInAlt, faSignOut, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
     const { data: session } = useSession();
@@ -16,61 +18,28 @@ const Navbar = () => {
 
     return (
         <>
-            <style>
-                {`
-                    .navbar {
-                        background-color: #ffffff;
-                        box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-                        padding: 6px;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    }
-
-                    .nav-brand {
-                        font-size: 30px;
-                        background-image: linear-gradient(to right, #8309db, #A594F9                        );
-                        -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;
-                        font-weight: bold;
-                        padding: 8px 15px;
-                    }
-
-                    .button {
-                        padding: 23px 15px;
-                        font-size: 18px;
-                    }
-
-                    .nav-right {
-                        margin-left: auto;
-                        display: flex;
-                        align-items: center;
-                    }
-
-                    .greeting {
-                        margin-right: 15px;
-                        font-size: 18px;
-                        font-weight: 500;
-                    }
-                `}
-            </style>
-            <nav className="navbar">
+            <nav className= "justify-around flex p-8 bg-white border-b-8 border-[#A93AFF]">
                 <div className="flex items-center">
-                    <div className="nav-brand">Admin-AI</div>
+                    <a href="/" className="text-[#A93AFF] font-extrabold font-sans font-bold text-3xl">Admin-AI <FontAwesomeIcon icon={faFile} /></a>
                 </div>
-                <div className="nav-right">
+                <div className="flex justify-center items-center text-white">
                     {session && (
-                        <div className="greeting">
-                            Signed in as {session.user.name}
-                        </div>
+                        // <div className="greeting mx-5 font-bold">
+                        //     {session.user.name}
+                        // </div>
+                        <div></div>
                     )}
                     {session ? (
-                        <Button onClick={handleLogout} className="button">Logout</Button>
+                        // <Button onClick={handleLogout} className="button">Logout</Button>
+                        <FontAwesomeIcon onClick={handleLogout} className="greeting mx-5 font-bold text-3xl text-[#A93AFF] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-[#FFC749]" icon={faSignOutAlt} />
+                        
+                        // <button className='bg-transparent text-white py-2 px-5 rounded border-2 border-white'>Logout</button>
                     ) : (
-                        <Button onClick={handleLogin} className="button">Login</Button>
+                        <FontAwesomeIcon onClick={handleLogin} className="greeting mx-5 font-bold text-3xl text-[#A93AFF] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-[#FFC749]" icon={faSignInAlt} />
                     )}
                 </div>
             </nav>
+            <div class="wave"></div>
         </>
     );
 };
