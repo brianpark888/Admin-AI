@@ -8,6 +8,7 @@ import Toast from './Toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faFileAlt, faFileClipboard, faPlus,  faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 const formsCollection = collection(db, 'forms');
 const submitFormWebsiteDomain = "http://localhost:3000/SubmitForm/";
 const reviewFormWebsiteDomain = "http://localhost:3000/ReviewForm/";
@@ -21,10 +22,11 @@ function FormList() {
     const [expandedFormId, setExpandedFormId] = useState(null);
     const [checkedFormId, setCheckedFormId] = useState(null);
     const [showToast, setShowToast] = useState(false);
+    const router = useRouter();
     const { data } = useSession({
         required: true,
         onUnauthenticated() {
-          router.replace("/login");
+            router.push("/Login");
         },
       });
 
@@ -126,7 +128,7 @@ function FormList() {
         <div className="flex min-h-screen flex-col items-center justify-between sm:p-24 bg-white">
             {/* <div className='relative w-full max-w-7xl'> */}
                 {/* <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div> */}
-                <div className='bg-white rounded-2xl z-10 w-4/5 h-auto border-2 border-gray-100 shadow-lg'>
+                <div className='bg-white rounded-4x4 z-10 w-4/5 h-auto border-2 border-gray-100 shadow-lg'>
                     <div className="w-full flex justify-between items-center border-2-black px-12 pt-12 pb-2 bg-[#8e7bed] rounded-sm">
                         <h1 className="font-bold text-2xl inline-block text-white">Your Forms</h1>
                         {/* <h>{data.user.name}</h> */}

@@ -87,7 +87,7 @@ export default function Home() {
       <div className='flex flex-row justify-around my-10'>
           <div class="flex justify-center items-center">
             
-              <div class="rounded-full  w-80 h-80 flex flex-col justify-center items-center bg-white text-[#A93AFF] shadow transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-lg">
+              <div class="rounded-full  w-80 h-80 flex flex-col justify-center items-center bg-white text-[#8e7bed] shadow transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-lg">
                   
               <div class="text-lg font-bold">Save Time</div>
                   <div className='my-5'>Number of Hours Saved</div>
@@ -95,7 +95,7 @@ export default function Home() {
               </div>
           </div>
           <div class="flex justify-center items-center">
-              <div class="rounded-full  w-80 h-80 flex flex-col justify-center items-center bg-[#A93AFF] text-white shadow transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-lg">
+              <div class="rounded-full  w-80 h-80 flex flex-col justify-center items-center bg-[#8e7bed] text-white shadow transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-lg">
                   
                   <div class="text-lg font-bold">Save Time</div>
                   <div className='my-5'>Number of Hours Saved</div>
@@ -104,7 +104,7 @@ export default function Home() {
               </div>
           </div>
           <div class="flex justify-center items-center">
-              <div class="rounded-full  w-80 h-80 flex flex-col justify-center items-center bg-[#A93AFF] text-white shadow transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-lg">
+              <div class="rounded-full  w-80 h-80 flex flex-col justify-center items-center bg-[#8e7bed] text-white shadow transition duration-300 ease-in-out transform hover:scale-110 hover:shadow-lg">
                   <div class="text-lg font-bold">Minimize Errors</div>
                   <div className='my-5'>AI Model Accuracy</div>
                   <div class="text-xl font-bold">92%</div>
