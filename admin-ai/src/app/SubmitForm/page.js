@@ -47,8 +47,8 @@ export default function Home() {
   height: 20px;
   border-radius: 20px;
   background:
-   linear-gradient(#8302E1 0 0) 0/0% no-repeat
-   lightblue;
+   linear-gradient(#8e7bed 0 0) 0/0% no-repeat
+   white;
   animation: l2 2s infinite steps(10);
 }
 @keyframes l2 {
@@ -58,7 +58,7 @@ export default function Home() {
       <div>
         {loading ? (
 (
-  <div className='justify-center flex items-center border-2 border-black h-screen'>
+  <div className='justify-center flex items-center h-screen bg-white'>
 <div class="loader"></div>
   </div>
   

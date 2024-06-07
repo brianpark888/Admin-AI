@@ -16,27 +16,30 @@ export default function Home() {
   const [formData, setFormData] = useState({ formName: '', field: '' });
   const [showChatBot, setShowChatBot] = useState(false); // State to toggle ChatBot
 
-  useEffect(() => {
-    const retrieveDoc = async () => {
-      const queryParams = new URLSearchParams(window.location.search);
-      const code = queryParams.get('code');
-      if (code) {
-        const formRef = doc(db, 'forms', code);
-        const docSnap = await getDoc(formRef);
-        if (docSnap.exists()) {
-          setFormData({
-            formName: docSnap.data().name,
-            description: docSnap.data().description,
-            field: docSnap.data().field,
-            prompt: docSnap.data().prompt,
-            creationTime: docSnap.data().submissionTime,
-          });
-          setFormId(code);
-        } else {
-          console.log("No such document!");
-        }
+
+  const retrieveDoc = async () => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const code = queryParams.get('code');
+    if (code) {
+      const formRef = doc(db, 'forms', code);
+      const docSnap = await getDoc(formRef);
+      if (docSnap.exists()) {
+        setFormData({
+          formName: docSnap.data().name,
+          description: docSnap.data().description,
+          field: docSnap.data().field,
+          prompt: docSnap.data().prompt,
+          creationTime: docSnap.data().submissionTime,
+        });
+        setFormId(code);
+      } else {
+        console.log("No such document!");
       }
-    };
+    }
+  };
+
+  useEffect(() => {
+    
     retrieveDoc();
   }, []);
 

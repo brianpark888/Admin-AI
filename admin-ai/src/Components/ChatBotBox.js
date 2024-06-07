@@ -14,6 +14,9 @@ const ChatBotBox = ({ onClose, formId, formQuestion }) => {
         const messageRef = collection(formRef, 'messages');
         const messagesSnapshot = await getDocs(messageRef);
         messagesSnapshot.docs.map(document => deleteDoc(doc(db, `forms/${formId}/messages`, document.id)))
+        setTimeout(() => {
+            window.location.reload();
+          }, 300);
     }
 
     return (
