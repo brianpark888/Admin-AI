@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className} style={{ backgroundColor: '#fcf7ff' }}>
+      <body className={inter.className} style={{ backgroundColor: '#ffffff' }}>
         <SessionProvider>{children}</SessionProvider> {/* 변경된 부분 */}
       </body>
     </html>
