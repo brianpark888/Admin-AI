@@ -20,13 +20,13 @@ export default function Home() {
     });
   }
 
-
+  
   
   const handleClick = () => {
     if (session) {
       router.push('/Home'); // 이미 로그인된 경우 Home 페이지로 이동
     } else {
-      signIn(); // 로그인되지 않은 경우 로그인 페이지로 이동
+      router.push('/Login'); // 로그인되지 않은 경우 로그인 페이지로 이동
     }
   };
 

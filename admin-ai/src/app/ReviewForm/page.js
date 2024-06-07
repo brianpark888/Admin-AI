@@ -54,8 +54,8 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center min-h-screen p-4">
-        <div className={`bg-white shadow-md rounded-lg max-w-screen-xl w-full p-20 transition-all duration-300`}>
+      <div className="flex justify-center min-h-screen p-4">
+        <div className={`bg-white shadow-md rounded-lg max-w-screen-xl w-full p-20 transition-all duration-300 mt-20`}>
           <div className="mb-6 flex justify-between items-center">
             <h1 className="text-3xl font-bold text-left">{formData.formName}</h1>
             <div className="flex items-center">
