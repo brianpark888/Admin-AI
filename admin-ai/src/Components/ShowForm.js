@@ -26,35 +26,35 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
       return;
     }
 
-    try{
-    const response = await fetch("/api/submit-check", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        input: field,
-        systemInstruction: "You are an AI that ensures that a response follows a certain format for a certain question. Question:"+ formQuestion + "Format:" + formPrompt + "If the response follows the format return '1' else return '0'."
-      }),
-    });
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const unprocessedResult = await response.json();
-    const booleanResult = unprocessedResult.parts[0];
-    setResult(booleanResult);
+    // try{
+    // const response = await fetch("/api/submit-check", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     input: field,
+    //     systemInstruction: "You are an AI that ensures that a response follows a certain format for a certain question. Question:"+ formQuestion + "Format:" + formPrompt + "If the response follows the format return '1' else return '0'."
+    //   }),
+    // });
+    // if (!response.ok) {
+    //   throw new Error(response.statusText);
+    // }
+    // const unprocessedResult = await response.json();
+    // const booleanResult = unprocessedResult.parts[0];
+    // setResult(booleanResult);
 
-    if (!result) {
-      return;
-    }
+    // if (!result) {
+    //   return;
+    // }
 
-    }catch (e) {
-      console.error("Error fetching chat response: ", e);
-    } finally {
-    }
+    // }catch (e) {
+    //   console.error("Error fetching chat response: ", e);
+    // } finally {
+    // }
     
 
-    if (result == 1){
+    // if (result == 1){
       try {
       
         // Reference to the 'submissions' subcollection under the specific form document
@@ -77,10 +77,10 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt}) => {
         console.error("Error submitting form: ", error);
         alert('Failed to submit the form.');
       }
-    }else{
-      console.error("The response does not follow the format. Please try again.")
-      alert("The response does not follow the format. Please try again.")
-    }
+    // }else{
+    //   console.error("The response does not follow the format. Please try again.")
+    //   alert("The response does not follow the format. Please try again.")
+    // }
     
   };
 
