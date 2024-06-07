@@ -60,7 +60,7 @@ export const ChatInput = ({ onSendMessage }) => {
       />
 
       <button onClick={handleSend}>
-        <IconArrowUp className="absolute right-2 bottom-3 h-8 w-8 hover:cursor-pointer rounded-full p-1 text-white hover:opacity-80" style={{ backgroundColor: "#8302E1" }} />
+        <IconArrowUp className="absolute right-2 bottom-3 h-8 w-8 hover:cursor-pointer rounded-full p-1 text-white hover:opacity-80" style={{ backgroundColor: "#8e7bed" }} />
       </button>
     </div>
   );

@@ -47,7 +47,7 @@ export default function Home() {
             <h1 class=" max-w-xl text-[2.9rem] leading-none text-gray-900 font-extrabold font-sans text-center lg:text-5xl lg:text-left lg:leading-tight mb-5">
               Welcome to Admin-AI
             </h1>
-            <p class="  max-w-xl text-center text-gray-500 lg:text-left lg:max-w-md ">
+            <p class="max-w-xl text-center text-gray-500 lg:text-left lg:max-w-md ">
             Our product uses AI to reduce the time for administrators to process forms sent in by submitter by ensuring proper formating and faster response processing.  
             </p>
             <div class="flex justify-center mt-14 lg:justify-start">
