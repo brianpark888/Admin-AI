@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Toast = ({ message, isVisible, onClose }) => {
+const Toast = ({ message, isVisible }) => {
+  const [visible, setVisible] = useState(isVisible);
+
   useEffect(() => {
     if (isVisible) {
+      setVisible(true);
       const timer = setTimeout(() => {
-        onClose();
-      }, 3000); // Toast will disappear after 3000 milliseconds (3 seconds)
+        setVisible(false);
+      }, 5000); // Toast will disappear after 5000 milliseconds (5 seconds)
       return () => clearTimeout(timer);
     }
-  }, [isVisible, onClose]);
+  }, [isVisible]);
 
   return (
-    isVisible && (
+    visible && (
       <div className="fixed bottom-4 right-4 z-50">
         <div className="bg-[#FFC749] text-white py-2 px-4 rounded-md shadow">
           {message}

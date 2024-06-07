@@ -127,7 +127,7 @@ function FormList() {
             {/* <div className='relative w-full max-w-7xl'> */}
                 {/* <div className='bg-[#8302E1] h-2.5 rounded-t-lg w-full absolute top-0 left-0'></div> */}
                 <div className='bg-white rounded-2xl z-10 w-4/5 h-auto border-2 border-gray-100 shadow-lg'>
-                    <div className="w-full flex justify-between items-center border-2-black px-12 pt-12 pb-2 bg-[#A93AFF] rounded-sm">
+                    <div className="w-full flex justify-between items-center border-2-black px-12 pt-12 pb-2 bg-[#8e7bed] rounded-sm">
                         <h1 className="font-bold text-2xl inline-block text-white">Your Forms</h1>
                         {/* <h>{data.user.name}</h> */}
                         <div className="flex gap-4">
@@ -153,20 +153,20 @@ function FormList() {
                         />
                     )}
                     <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-[#201925]">
+                        <thead className="bg-[#d6dce6]">
                             <tr>
                                 <th scope="col" className="w-1/12 px-6 py-4">
                                 </th>
-                                <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider">
+                                <th scope="col" className="w-4/12 px-6 py-3 text-left text-sm font-medium text-[#273045] uppercase tracking-wider">
                                     Form Name
                                 </th>
-                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider">
+                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-[#273045] uppercase tracking-wider">
                                     Description
                                 </th>
-                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider">
+                                <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-[#273045] uppercase tracking-wider">
                                     Response
                                 </th>
-                                <th scope="col" className="w-4/12 px-4 py-3 text-left text-sm font-medium text-white uppercase tracking-wider">
+                                <th scope="col" className="w-4/12 px-4 py-3 text-left text-sm font-medium text-[#273045] uppercase tracking-wider">
                                 </th>
                             </tr>
                         </thead>

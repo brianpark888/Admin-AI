@@ -36,8 +36,8 @@ export default function Home() {
     <div class="absolute top-0 right-0 m-5">
     <div class="bg-gray-200 shadow-md rounded-lg">
         <ul class="flex space-x-4 p-4">
-            <li><a href="#" onClick={scrollDown} class="text-gray-700 hover:text-[#A93AFF]">About</a></li>
-            <li><a href="Login" class="text-gray-700 hover:text-[#A93AFF]">Login</a></li>
+            <li><a href="#" onClick={scrollDown} class="text-gray-700 hover:text-[#8e7bed]">About</a></li>
+            <li><a href="Login" class="text-gray-700 hover:text-[#8e7bed]">Login</a></li>
         </ul>
     </div>
 </div>
@@ -51,7 +51,7 @@ export default function Home() {
             Our product uses AI to reduce the time for administrators to process forms sent in by submitter by ensuring proper formating and faster response processing.  
             </p>
             <div class="flex justify-center mt-14 lg:justify-start">
-              <button type="button" onClick={handleClick} class="text-white bg-[#A93AFF] font-medium rounded-lg px-5 py-4 text-center hover:bg-[#A93AFF]/75 hover:drop-shadow-md transition duration-300 ease-in-out">
+              <button type="button" onClick={handleClick} class="text-white bg-[#8e7bed] font-medium rounded-lg px-5 py-4 text-center hover:bg-[#8e7bed]/75 hover:drop-shadow-md transition duration-300 ease-in-out">
                 Create Form  <FontAwesomeIcon icon={faPlus} />
               </button>
               <button onClick={scrollDown} type="button" class="ml-4 text-gray-900 bg-gray-200 font-medium rounded-lg px-5 py-4 text-center hover:bg-gray-200/75 hover:drop-shadow-md transition duration-300 ease-in-out">
@@ -70,7 +70,7 @@ export default function Home() {
             <img src="/file_image.png" alt="File Icon" />
           </div>
           <div className=' w-3/5 bg-white content-center'>
-            <h1 className="text-center text-[#A93AFF] font-bold text-3xl my-10 font-extrabold font-sans">We Understand Your Pain</h1>
+            <h1 className="text-center text-[#8e7bed] font-bold text-3xl my-10 font-extrabold font-sans">We Understand Your Pain</h1>
             <div className=' h-auto content-center'>
               <div className='mx-40'>
               <p className="text-md my-2"><span className='text-xl font-bold'>Challenges of Manual Administration.</span> Administrators waste lots of time each day on routine data management tasks, diverting their focus from more strategic activities. This repetitive process significantly reduces productivity.</p>
