@@ -54,13 +54,7 @@ function DataTable({ formId }) {
       <table className="min-w-full divide-y divide-gray-200 border-collapse">
         <thead className="bg-gray-50">
           <tr>
-            <th className="border-b border-r px-6 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">
-              <input
-                type="checkbox"
-                checked={selectedRows.length === responses.length}
-                onChange={toggleSelectAllRows}
-              />
-            </th>
+
             <th className="border-b border-r px-6 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">
               Name
             </th>
@@ -76,13 +70,7 @@ function DataTable({ formId }) {
           {responses.map((response, index) => (
             <React.Fragment key={index}>
               <tr className={selectedRows.includes(index) ? 'bg-slate-100' : ''}>
-                <td className="border-b border-r px-6 py-4 text-center whitespace-nowrap text-sm font-medium text-gray-900">
-                  <input
-                    type="checkbox"
-                    checked={selectedRows.includes(index)}
-                    onChange={() => toggleSelectRow(index)}
-                  />
-                </td>
+  
                 <td className="border-b border-r text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {response.name}
                 </td>
