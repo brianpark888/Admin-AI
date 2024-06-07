@@ -137,51 +137,6 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <div className="absolute top-0 right-0 m-5">
-          <div className="bg-gray-200 shadow-md rounded-lg">
-            <ul className="flex space-x-4 p-4">
-              <li><a href="#" onClick={scrollDown} className="text-gray-700 hover:text-[#A93AFF]">About</a></li>
-              <li><a href="#Login" className="text-gray-700 hover:text-[#A93AFF]">Login</a></li>
-            </ul>
-          </div>
-        </div>
-        <section id="home">
-          <div className="h-screen flex p-20 justify-center items-center bg-white">
-            <div className="lg:mb-0 lg:w-1/2">
-              <h1 className="max-w-xl text-[2.9rem] leading-none text-gray-900 font-extrabold font-sans text-center lg:text-5xl lg:text-left lg:leading-tight mb-5">
-                Welcome to Admin-AI
-              </h1>
-              <p className="max-w-xl text-center text-gray-500 lg:text-left lg:max-w-md">
-                Our product uses AI to reduce the time for administrators to process forms sent in by submitter by ensuring proper formatting and faster response processing.
-              </p>
-              <div className="flex justify-center mt-14 lg:justify-start">
-                <button type="button" onClick={handleClick} className="text-white bg-[#A93AFF] font-medium rounded-lg px-5 py-4 text-center hover:bg-[#A93AFF]/75 hover:drop-shadow-md transition duration-300 ease-in-out">
-                  Create Form <FontAwesomeIcon icon={faPlus} />
-                </button>
-                <button onClick={scrollDown} type="button" className="ml-4 text-gray-900 bg-gray-200 font-medium rounded-lg px-5 py-4 text-center hover:bg-gray-200/75 hover:drop-shadow-md transition duration-300 ease-in-out">
-                  Learn More <FontAwesomeIcon icon={faArrowRight} />
-                </button>
-              </div>
-            </div>
-            <div className="w-1/2">
-              <img className="mt-auto rounded-2xl w-full" src="https://www.coursesonline.co.uk/wp-content/uploads/Subject-Business-Administration.jpeg?height=485&dpr=2" alt="hero-img"></img>
-            </div>
-          </div>
-        </section>
-        <section id="Video">
-          <div className="h-screen bg-white flex flex-row-2">
-            <div className="w-2/5 bg-[#A93AFF] content-center">
-              <p className="text-center text-white font-bold text-3xl"><FontAwesomeIcon icon={faFileAlt} /></p>
-            </div>
-            <div className="w-3/5 bg-gray-100 content-center">
-              <h1 className="text-center text-[#A93AFF] font-bold text-3xl my-10 font-extrabold font-sans">We Understand Your Pain</h1>
-              <div className="h-auto content-center">
-                <div className="mx-40">
-                  <p className="text-md my-2"><span className="text-xl font-bold">Challenges of Manual Administration.</span> Administrators waste lots of time each day on routine data management tasks, diverting their focus from more strategic activities. This repetitive process significantly reduces productivity.</p>
-                  <p className="my-2"><span className="text-lg font-bold">Countless Hours Spent on Manual Processing.</span> Envision days filled with mundane tasks such as following up on incorrect entries, and manually inputting data. This leads to increased frustration, exhaustion, and potential errors in data management.</p>
-                  <p className="my-2"><span className="text-lg font-bold">Introducing AI-Powered Administrative Tools.</span> Transform your administrative tasks with our AI-powered system, similar to advanced form automation tools. This platform automates the validation and collection of data right at submission, liberating administrators from the grind of repetitive tasks. By focusing only on exceptions or anomalies, administrators can dramatically reduce the time spent on these tasks, often to just a fraction of what it was.</p>
-                </div>
               </div>
             </div>
           </div>
