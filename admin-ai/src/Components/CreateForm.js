@@ -5,19 +5,11 @@ import Button from "./Button";
 import Toast from './Toast';
 import {db} from '@/firebase';
 import {collection, query, doc, getDocs, addDoc, updateDoc, deleteDoc, orderBy, where,} from 'firebase/firestore';
+import { useSession } from 'next-auth/react';
+
 
 
 const formsCollection = collection(db, 'forms');
-function generateCode() {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  let code = '';
-  for (let i = 0; i < 6; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      code += characters[randomIndex];
-  }
-  return code;
-}
-
 
 const CreateForm = ({ onClose }) => {
   const router = useRouter();
@@ -26,6 +18,14 @@ const CreateForm = ({ onClose }) => {
   const [field, setField] = useState('');
   const [prompt, setPrompt] = useState(''); // set state variables
   const [showToast, setShowToast] = useState(false); // set state variable
+  const { data } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.replace("/login");
+    },
+  });
+
+  
 
   const handleChange = (event, setter) => {
     setter(event.target.value);
@@ -47,7 +47,7 @@ const CreateForm = ({ onClose }) => {
       description: description,
       field: field,
       prompt: prompt,
-      code: generateCode(),
+      username: data.user.name,
       submissionTime: new Date().toISOString(),
     });
 
