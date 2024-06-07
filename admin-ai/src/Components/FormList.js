@@ -10,8 +10,8 @@ import { faCaretDown, faFileAlt, faFileClipboard, faPlus,  faTrash } from '@fort
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 const formsCollection = collection(db, 'forms');
-const submitFormWebsiteDomain = "http://localhost:3000/SubmitForm/";
-const reviewFormWebsiteDomain = "http://localhost:3000/ReviewForm/";
+const submitFormWebsiteDomain = "https://admin-ai-final.vercel.app/SubmitForm/";
+const reviewFormWebsiteDomain = "https://admin-ai-final.vercel.app/ReviewForm/";
 
 
 function FormList() {
