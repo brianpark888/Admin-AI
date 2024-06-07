@@ -20,9 +20,11 @@ const Navbar = () => {
         <>
             <nav className= "justify-around flex p-8 bg-white border-b-8 border-[#8e7bed]">
                 <div className="flex items-center">
+
                     <a href="/">
                         <img src="/LogoAdminAI.svg" alt="Admin-AI Logo" className="h-10 w-auto" />
                     </a>
+
                 </div>
                 <div className="flex justify-center items-center text-white">
                     {session && (
