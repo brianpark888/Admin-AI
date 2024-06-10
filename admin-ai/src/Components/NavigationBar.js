@@ -35,11 +35,21 @@ const Navbar = () => {
                     )}
                     {session ? (
                         // <Button onClick={handleLogout} className="button">Logout</Button>
-                        <FontAwesomeIcon onClick={handleLogout} className="greeting mx-5 font-bold text-3xl text-[#8e7bed] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-[#FFC749]" icon={faSignOutAlt} />
-                        
-                        // <button className='bg-transparent text-white py-2 px-5 rounded border-2 border-white'>Logout</button>
+                        <button 
+                            onClick={handleLogout} 
+                            className="flex items-center text-xl text-[#8e7bed] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-[#FFC749]"
+                        >
+                            <span className="mr-2">Logout</span>
+                            <FontAwesomeIcon icon={faSignOutAlt} />
+                        </button>
                     ) : (
-                        <FontAwesomeIcon onClick={handleLogin} className="greeting mx-5 font-bold text-3xl text-[#8e7bed] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-[#FFC749]" icon={faSignInAlt} />
+                        <button 
+                            onClick={handleLogin} 
+                            className="flex items-center text-xl text-[#8e7bed] hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 hover:text-[#FFC749]"
+                        >
+                            <span className="mr-2">Login</span>
+                            <FontAwesomeIcon icon={faSignInAlt} />
+                        </button>
                     )}
                 </div>
             </nav>
