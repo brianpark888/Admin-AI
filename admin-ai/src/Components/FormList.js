@@ -166,7 +166,7 @@ function FormList() {
                                     Description
                                 </th>
                                 <th scope="col" className="w-3/12 px-6 py-3 text-left text-sm font-medium text-[#273045] uppercase tracking-wider">
-                                    Response
+                                    # of Responses
                                 </th>
                                 <th scope="col" className="w-4/12 px-4 py-3 text-left text-sm font-medium text-[#273045] uppercase tracking-wider">
                                 </th>

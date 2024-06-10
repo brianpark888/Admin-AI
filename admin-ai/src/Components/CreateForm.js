@@ -75,7 +75,7 @@ const CreateForm = ({ onClose }) => {
         <div className="p-4">
           <form onSubmit={handleSubmit}>
             <div className='mb-4'>
-              <label className="block mb-2 text-gray-700 font-semibold">Name</label>
+              <label className="block mb-2 text-gray-700 font-semibold">Form Name</label>
               <input
                 type="text"
                 value={name}
@@ -84,7 +84,7 @@ const CreateForm = ({ onClose }) => {
               />
             </div>
             <div className='mb-4'>
-              <label className="block mb-2 text-gray-700 font-semibold">Description</label>
+              <label className="block mb-2 text-gray-700 font-semibold">Form Description</label>
               <input
                 type="text"
                 value={description}
@@ -93,7 +93,7 @@ const CreateForm = ({ onClose }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block mb-2 text-gray-700 font-semibold">Field</label>
+              <label className="block mb-2 text-gray-700 font-semibold">Question</label>
               <input
                 type="text"
                 value={field}
@@ -103,7 +103,7 @@ const CreateForm = ({ onClose }) => {
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 text-gray-700 font-semibold">Prompt</label>
+              <label className="block mb-2 text-gray-700 font-semibold">Answer Format</label>
               <textarea
                 value={prompt}
                 onChange={(event) => handleChange(event, setPrompt)}
