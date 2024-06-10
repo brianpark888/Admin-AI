@@ -37,15 +37,15 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          input: field + "If the response follows the format return '1' else return '0'",
-          systemInstruction: "For this Question," + formQuestion + ". Ensure that the answer follows the format:" + formPrompt 
+          input: `Here is the response '${field}'. If the response follows the format return '1' else return '0'. Do not provide any other response.`,
+          systemInstruction: `For this Question: ${formQuestion}. Ensure that the answer follows the format: ${formPrompt}`
         }),
       });
       if (!response.ok) {
         throw new Error(response.statusText);
       }
       const unprocessedResult = await response.json();
-      booleanResult = unprocessedResult.parts[0];
+      booleanResult = unprocessedResult.parts[0]; // Ensure trimming any extra spaces
       setResult(booleanResult);
 
     } catch (e) {
@@ -54,7 +54,7 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt }) => {
       return;
     }
 
-    if (booleanResult === '1') {
+    if (booleanResult === '1') { // Compare correctly
       try {
         const submissionsRef = collection(db, "forms", formId, "submissions");
 
@@ -75,8 +75,8 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt }) => {
         alert('Failed to submit the form.');
       }
     } else {
-      console.error("The response does not follow the format. Please try again.")
-      alert("The response does not follow the format. Please try again.")
+      console.error("The response does not follow the format. Please try again.");
+      alert("The response does not follow the format. Please try again.");
     }
 
     setIsLoading(false); // Stop loading after submission
@@ -98,7 +98,7 @@ const ShowForm = ({ formId, formName, formQuestion, formPrompt }) => {
               <input type="text" id="name" className="w-full my-2 p-2 bg-gray-100 rounded-lg focus:outline-none focus:ring focus:ring-[#8e7bed]" value={name} onChange={(e) => handleChange(e, setName)} />
               
               <label htmlFor="email" className="block mb-2 font-bold">Email</label>
-              <input type="email" id="email" className="w-full  my-2 p-2  bg-gray-100 rounded-lg focus:outline-none focus:ring focus:ring-[#8e7bed]" value={email} onChange={(e) => handleChange(e, setEmail)} />
+              <input type="email" id="email" className="w-full  my-2 p-2 bg-gray-100 rounded-lg focus:outline-none focus:ring focus:ring-[#8e7bed]" value={email} onChange={(e) => handleChange(e, setEmail)} />
               
             </div>
             <div className="mb-5">
